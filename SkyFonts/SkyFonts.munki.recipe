@@ -52,6 +52,19 @@
 			<string>Unarchiver</string>
 		</dict>
 		<dict>
+		<key>Arguments</key>
+		<dict>
+			<key>source_path</key>
+			<string>%RECIPE_CACHE_DIR%/%NAME%/Install SkyFonts.app/Resources/%NAME%.app</string>
+			<key>destination_path</key>
+			<string>%RECIPE_CACHE_DIR%/%NAME%/%NAME%.app</string>
+			<key>overwrite</key>
+			<true/>
+		</dict>
+		<key>Processor</key>
+		<string>Copier</string>
+	</dict>
+		<!--<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>dmg_path</key>
@@ -62,6 +75,7 @@
 			<key>Processor</key>
 			<string>DmgCreator</string>
 		</dict>
+	-->
 		<!--
 		<dict>
 			<key>Arguments</key>
