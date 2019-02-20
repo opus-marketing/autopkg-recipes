@@ -64,6 +64,15 @@
 		<key>Processor</key>
 		<string>Copier</string>
 	</dict>
+	<dict>
+	<key>Arguments</key>
+	<dict>
+		<key>path_list</key>
+		<string>%RECIPE_CACHE_DIR%/%NAME%/Install SkyFonts.app</string>
+	</dict>
+	<key>Processor</key>
+	<string>PathDeleter</string>
+</dict>
 		<!--<dict>
 			<key>Arguments</key>
 			<dict>
