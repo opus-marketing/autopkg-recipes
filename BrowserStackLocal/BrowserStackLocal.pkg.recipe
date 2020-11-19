@@ -3,22 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.1.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Rambox and creates a package.</string>
+	<string>Downloads the latest version of BrowserStackLocal and creates a package.</string>
 	<key>Identifier</key>
-	<string>com.github.opusmarketing.pkg.Rambox</string>
+	<string>com.github.opusmarketing.pkg.BrowserStackLocal</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.grupovrs.ramboxce</string>
 		<key>NAME</key>
-		<string>Rambox</string>
+		<string>BrowserStackLocal</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.download.Rambox</string>
+	<string>com.github.opusmarketing.download.BrowserStackLocal</string>
 	<key>Process</key>
 	<array>
 		<dict>

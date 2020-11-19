@@ -3,29 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.1.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
-	<string>Downloads the latest version of Rambox and imports it into Munki.</string>
+	<string>Downloads the latest version of BrowserStackLocal and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>com.github.opusmarketing.munki.Rambox</string>
+	<string>com.github.opusmarketing.munki.BrowserStackLocal</string>
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>Rambox</string>
+		<string>BrowserStackLocal</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
 			<array>
-				<string>default</string>
+				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Free, Open-Source messaging and email.</string>
+			<string> </string>
 			<key>developer</key>
-			<string>Ramiro Saenz</string>
+			<string>BrowserStack Limited</string>
 			<key>display_name</key>
-			<string>Rambox</string>
+			<string>BrowserStackLocal</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -35,7 +35,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.download.Rambox</string>
+	<string>com.github.opusmarketing.download.BrowserStackLocal</string>
 	<key>Process</key>
 	<array>
 		<dict>
