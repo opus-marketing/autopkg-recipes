@@ -63,6 +63,7 @@
 				<string>%pathname%/CraftManager.app/Contents/Info.plist</string>
 				<key>plist_version_key</key>
 				<string>CFBundleShortVersionString</string>
+				<key>plist_version_key</key>
 				<string>CFBundleVersion</string>
 			</dict>
 			<key>Processor</key>
