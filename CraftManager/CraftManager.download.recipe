@@ -60,7 +60,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>input_plist_path</key>
-				<string>%pathname%/CraftManager.app/Contents/Info.plist</string>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/CraftManager.app/Contents/Info.plist</string>
 				<key>plist_version_key</key>
 				<string>CFBundleShortVersionString</string>
 				<key>plist_version_key</key>
