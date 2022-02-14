@@ -16,10 +16,6 @@
 		<string>MunkiReport Python</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>Python.app</string>
-			</array>
 			<key>catalogs</key>
 			<array>
 				<string>default</string>
@@ -29,7 +25,7 @@
 			<key>developer</key>
 			<string></string>
 			<key>display_name</key>
-			<string>Python</string>
+			<string></string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
