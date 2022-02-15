@@ -39,7 +39,7 @@
 				<string>%DOWNLOAD_URL%/%version%/%filename%</string>
 			</dict>
 		</dict>
-		<dict>
+<!--		<dict>
 			<key>Processor</key>
 			<string>FileMover</string>
 			<key>Arguments</key>
@@ -50,9 +50,11 @@
 				<string>%RECIPE_CACHE_DIR%/downloads/MAMP_MAMP_PRO_%version%.pkg</string>
 			</dict>
 		</dict>
+-->
+<!--
 		<dict>
 			<key>Processor</key>
-			    <string>com.github.grahampugh.recipes.CommonProcessors/StringReplacer.py</string>
+			    <string>com.github.grahampugh.recipes.CommonProcessors/StringReplacer</string>
 			<key>Arguments</key>
 			<dict>
 				<key>input_string</key>
@@ -65,6 +67,7 @@
 				<string>%filename%</string>
 			</dict>
 		</dict>
+-->
 		<dict>
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
