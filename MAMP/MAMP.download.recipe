@@ -27,7 +27,7 @@
 				<key>url</key>
 				<string>%SEARCH_URL%</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;filename&gt;MAMP_MAMP_PRO_(?P&lt;version&gt;((?:(\d+?)\.)?(?:(\d+?)\.)?(\*|\d+?))))-(?P&lt;arch&gt;Intel-x86).pkg"</string>
+				<string>(?P&lt;filename&gt;MAMP_MAMP_PRO_(?P&lt;version&gt;((?:(\d+?)\.)?(?:(\d+?)\.)?(\*|\d+?)))-(?P&lt;arch&gt;Intel-x86).pkg)"</string>
 			</dict>
 		</dict>
 		<dict>
@@ -36,7 +36,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>%DOWNLOAD_URL%/%version%/%filename%-%arch%.pkg</string>
+				<string>%DOWNLOAD_URL%/%version%/%filename%</string>
 			</dict>
 		</dict>
 		<dict>
@@ -45,9 +45,24 @@
 			<key>Arguments</key>
 			<dict>
 				<key>source</key>
-				<string>%RECIPE_CACHE_DIR%/downloads/%filename%-%arch%.pkg</string>
+				<string>%RECIPE_CACHE_DIR%/downloads/%filename%</string>
 				<key>target</key>
 				<string>%RECIPE_CACHE_DIR%/downloads/MAMP_MAMP_PRO_%version%.pkg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			    <string>com.github.homebysix.FindAndReplace/FindAndReplace</string>
+			<key>Arguments</key>
+			<dict>
+				<key>input_string</key>
+				<string>%filename%</string>
+				<key>string_to_replace</key>
+				<string>-Intel-x86</string>
+				<key>replacement_string</key>
+				<string></string>
+				<key>output_string</key>
+				<string>%filename%</string>
 			</dict>
 		</dict>
 		<dict>
