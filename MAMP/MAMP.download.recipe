@@ -27,7 +27,7 @@
 				<key>url</key>
 				<string>%SEARCH_URL%</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;filename&gt;MAMP_MAMP_PRO_(?P&lt;version&gt;((?:(\d+?)\.)?(?:(\d+?)\.)?(\*|\d+?)))\)(?P&lt;arch&gt;-Intel-x86.pkg)"</string>
+				<string>(?P&lt;filename&gt;MAMP_MAMP_PRO_(?P&lt;version&gt;((?:(\d+?)\.)?(?:(\d+?)\.)?(\*|\d+?))))(?P&lt;arch&gt;-Intel-x86.pkg)"</string>
 			</dict>
 		</dict>
 		<dict>
@@ -45,7 +45,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>source</key>
-				<string>%RECIPE_CACHE_DIR%/downloads/%filename%</string>
+				<string>%RECIPE_CACHE_DIR%/downloads/%filename%-%arch%</string>
 				<key>target</key>
 				<string>%RECIPE_CACHE_DIR%/downloads/MAMP_MAMP_PRO_%version%.pkg</string>
 			</dict>
