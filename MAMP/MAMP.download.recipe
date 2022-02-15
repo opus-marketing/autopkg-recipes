@@ -52,7 +52,7 @@
 		</dict>
 		<dict>
 			<key>Processor</key>
-			    <string>com.github.grahampugh.recipes.commonprocessors/StringReplacer</string>
+			    <string>com.github.grahampugh.recipes.CommonProcessors/StringReplacer</string>
 			<key>Arguments</key>
 			<dict>
 				<key>input_string</key>
