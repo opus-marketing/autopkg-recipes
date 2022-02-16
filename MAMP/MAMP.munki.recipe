@@ -61,6 +61,27 @@
 					<string>installer_choice_3</string>
 				</dict>
 			</array>
+			<key>receipts</key>
+			<array>
+				<dict>
+					<key>optional</key>
+					<true/>
+					<key>packageid</key>
+					<string>de.appsolute.installer.mamppro.pkg</string>
+				</dict>
+				<dict>
+					<key>optional</key>
+					<true/>
+					<key>packageid</key>
+					<string>de.appsolute.installer.mampendinstall.pkg</string>
+				</dict>
+				<dict>
+					<key>optional</key>
+					<false/>
+					<key>packageid</key>
+					<string>de.appsolute.installer.mamp.pkg</string>
+				</dict>
+			</array>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
