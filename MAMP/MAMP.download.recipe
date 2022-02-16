@@ -51,10 +51,9 @@
 			</dict>
 		</dict>
 -->
-<!--
 		<dict>
 			<key>Processor</key>
-			    <string>com.github.grahampugh.recipes.CommonProcessors/StringReplacer</string>
+			    <string>com.github.grahampugh.recipes.commonprocessors/StringReplacer</string>
 			<key>Arguments</key>
 			<dict>
 				<key>input_string</key>
@@ -67,7 +66,6 @@
 				<string>%filename%</string>
 			</dict>
 		</dict>
--->
 		<dict>
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
