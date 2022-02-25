@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of Rambox and imports it into Munki.</string>
 	<key>Identifier</key>
@@ -18,12 +18,12 @@
 		<dict>
 			<key>catalogs</key>
 			<array>
-				<string>default</string>
+				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Free, Open-Source messaging and email.</string>
+			<string> </string>
 			<key>developer</key>
-			<string>Ramiro Saenz</string>
+			<string>Rambox LLC</string>
 			<key>display_name</key>
 			<string>Rambox</string>
 			<key>name</key>
