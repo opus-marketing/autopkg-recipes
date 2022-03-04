@@ -20,22 +20,14 @@
 	<key>Process</key>
 	<array>
 		<dict>
+			<key>Processor</key>
+			<string>Installer</string>
 			<key>Arguments</key>
 			<dict>
-				<key>dmg_path</key>
-				<string>%pathname%</string>
-				<key>items_to_copy</key>
-				<array>
-					<dict>
-						<key>destination_path</key>
-						<string>/Applications</string>
-						<key>source_item</key>
-						<string>Jamf Connect.app</string>
-					</dict>
-				</array>
+			    <key>pkg_path</key>
+			    <string>%pathname%/JamfConnect.pkg</string>
 			</dict>
-			<key>Processor</key>
-			<string>InstallFromDMG</string>
+
 		</dict>
 	</array>
 </dict>
