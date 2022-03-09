@@ -16,12 +16,6 @@
 		<string>Jamf Connect</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>Jamf Connect.app</string>
-				<string>LauncherApplication.app</string>
-				<string>UnlockLogin.app</string>
-			</array>
 			<key>catalogs</key>
 			<array>
 				<string>default</string>
@@ -36,6 +30,20 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>preinstall_script</key>
+			<string>#!/bin/bash
+## get currently logged in user
+username=$(/usr/bin/stat -f "%Su" /dev/console)
+sudo -u $username /bin/launchctl unload /Library/LaunchAgents/com.jamf.connect.plist
+sleep 3
+			</string>
+<key>postinstall_script</key>
+			<string>#!/bin/bash
+## get currently logged in user
+username=$(/usr/bin/stat -f "%Su" /dev/console)
+sudo -u $username /bin/launchctl load /Library/LaunchAgents/com.jamf.connect.plist
+sleep 3
+			</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
