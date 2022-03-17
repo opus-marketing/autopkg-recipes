@@ -23,7 +23,7 @@
 			<key>description</key>
 			<string>Color effects manager for Razer devices for macOS. Supports High Sierra (10.13) to Monterey (12.0). Made by the community, based on openrazer.</string>
 			<key>developer</key>
-			<string>Ville Karja</string>
+			<string>Ken Chen</string>
 			<key>display_name</key>
 			<string>Razer macOS</string>
 			<key>name</key>
@@ -38,6 +38,15 @@
 	<string>com.github.opusmarketing.download.RazermacOS</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>dmg_path</key>
+				<string>%pathname%</string>
+			</dict>
+			<key>Processor</key>
+			<string>AppDmgVersioner</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
