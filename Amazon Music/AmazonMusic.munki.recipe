@@ -36,7 +36,7 @@
     		<true/>
             <key>postinstall_script</key>
             <string>#!/bin/bash
-/bin/sh "/private/tmp/Amazon Music Installer.app/Contents/MacOS/installbuilder.sh" --unattendedmodeui none
+/bin/sh "/private/tmp/Amazon Music Installer.app/Contents/MacOS/osx-x86_64" --unattendedmodeui none
         </string>
     	</dict>
     </dict>
