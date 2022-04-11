@@ -15,7 +15,7 @@
         <key>SEARCH_URL</key>
         <string>https://qatgqujbd2.execute-api.us-west-2.amazonaws.com/prod/getCurrentVersion</string>
         <key>SEARCH_PATTERN</key>
-        <string>(https://[A-Za-z0-9.-]+cloudfront\.net/mac/.*?/Amazon\+Music\+Installer\.dmg)</string>
+        <string>(https://[A-Za-z0-9.-]+cloudfront\.net/mac/[A-Za-z0-9_]+/Amazon\+Music\+Installer\.dmg)</string>
     </dict>
     <key>MinimumVersion</key>
     <string>0.4.0</string>
@@ -35,6 +35,8 @@
                 <string>%SEARCH_URL%</string>
                 <key>re_pattern</key>
                 <string>%SEARCH_PATTERN%</string>
+                <key>result_output_var_name</key>
+                <string>DOWNLOAD_URL</string>
             </dict>
         </dict>
         <dict>
@@ -43,7 +45,7 @@
             <key>Arguments</key>
             <dict>
                 <key>url</key>
-                <string>%url%</string>
+                <string>%DOWNLOAD_URL%</string>
                 <key>request_headers</key>
                 <dict>
                         <key>user-agent</key>
