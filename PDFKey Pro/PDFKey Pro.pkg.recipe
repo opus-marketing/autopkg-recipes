@@ -3,15 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.2.1 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of PDFKey Pro and creates a package.</string>
 	<key>Identifier</key>
 	<string>com.github.opusmarketing.pkg.PDFKeyPro</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>com.pdfkey.pdfkeypro</string>
 		<key>NAME</key>
 		<string>PDFKey Pro</string>
 	</dict>
