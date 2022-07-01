@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Saber After Effects Plugin and creates a package.</string>
+	<key>Identifier</key>
+	<string>local.pkg.SaberAEPlugin</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Saber After Effects Plugin</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>local.download.SaberAEPlugin</string>
+	<key>Process</key>
+	<array>
+
+    	<!-- <dict>
+		    <key>Arguments</key>
+			    <dict>
+				    <key>url</key>
+				    <string>https://www.videocopilot.net/dl/zu2TeXAuya/</string>
+				    <key>filename</key>
+				    <string>SaberInstaller.zip</string>
+    			</dict>
+			<key>Processor</key>
+	    	<string>DmgMounter</string>
+		</dict> -->
+
+		<dict>
+            <key>Arguments</key>
+			    <dict>
+				    <key>source_path</key>
+                    <string>%RECIPE_CACHE_DIR%/downloads/SaberInstaller.dmg/*.app</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/downloads/</string>
+                </dict>
+			<key>Processor</key>
+			<string>Copier</string>
+		</dict>
+        
+	</array>
+</dict>
+</plist>
