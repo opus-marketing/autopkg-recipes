@@ -33,7 +33,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>de.fau.rrze.download.networkShareMounter</string>
+	<string>com.opusmarketing.download.networkShareMounter</string>
 	<key>Process</key>
 	<array>
 		<dict>
