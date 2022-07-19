@@ -30,19 +30,6 @@
                 <string>match</string>
             </dict>
         </dict>
-<!--         <dict>
-            <key>Processor</key>
-            <string>URLTextSearcher</string>
-            <key>Arguments</key>
-            <dict>
-                <key>url</key>
-                <string>https://gitlab.rrze.fau.de/api/v4/projects/506/releases</string>
-                <key>re_pattern</key>
-                <string>%match%/NetworkShareMounter((([a-z]|[A-Z])+){0,}).dmg</string>
-                <key>result_output_var_name</key>
-                <string>match2</string>
-            </dict>
-        </dict> -->
     	<dict>
             <key>Processor</key>
             <string>URLDownloader</string>

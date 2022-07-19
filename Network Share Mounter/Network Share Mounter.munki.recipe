@@ -23,7 +23,7 @@
 			<key>developer</key>
 			<string>Regionales Rechenzentrum Erlangen.</string>
 			<key>display_name</key>
-			<string>Network Share ounter</string>
+			<string>Network Share Mounter</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
