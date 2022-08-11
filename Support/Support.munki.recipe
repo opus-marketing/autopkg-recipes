@@ -30,7 +30,7 @@
 			<array>
 				<dict>
 					<key>optional</key>
-					<true/>
+					<false/>
 					<key>packageid</key>
 					<string>nl.root4.support</string>
 				</dict>
