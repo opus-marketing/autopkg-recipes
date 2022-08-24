@@ -21,15 +21,13 @@
                 <string>testing</string>
             </array>
             <key>developer</key>
-            <string>%MUNKI_DEVELOPER%</string>
-            <key>category</key>
-            <string>%MUNKI_CATEGORY%</string>
+            <string>Screaming Frog Ltd</string>
             <key>description</key>
             <string>The Screaming Frog SEO Spider is a small desktop program you can install locally on your PC, Mac or Linux machine which spiders websites’ links, images, CSS, script and apps from an SEO perspective. It fetches key onsite elements for SEO, presents them in tabs by type and allows you to filter for common SEO issues, or slice and dice the data how you see fit by exporting into Excel. You can view, analyse and filter the crawl data as it’s gathered and updated continuously in the program’s user interface.</string>
             <key>display_name</key>
             <string>%NAME%</string>
             <key>name</key>
-            <string>%NAME%</string>
+            <string>%NAMEWITHOUTSPACES%</string>
             <key>unattended_install</key>
             <true/>
         </dict>
