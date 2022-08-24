@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest version of Call Manager.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.download.CallManagerUniversal</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>CallManager</string>
+		<key>intel_download_url</key>
+		<string>https://customer.hfo-cloud.de/frontend/application/mac/CallManagerInstaller.dmg</string>
+		<key>applesilicon_download_url</key>
+		<string>https://customer.hfo-cloud.de/frontend/application/macarm/CallManagerInstaller.dmg</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.1</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/intel</string>
+				<key>url</key>
+				<string>%intel_download_url%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_path</key>
+				<string>%pathname%/Call Manager.app</string>
+				<key>requirement</key>
+				<string>identifier "de.crown.ccs.app" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = TT2E752Z5K</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/applesilicon</string>
+				<key>url</key>
+				<string>%applesilicon_download_url%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_path</key>
+				<string>%pathname%/Call Manager.app</string>
+				<key>requirement</key>
+				<string>identifier "de.crown.ccs.app" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = TT2E752Z5K</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
