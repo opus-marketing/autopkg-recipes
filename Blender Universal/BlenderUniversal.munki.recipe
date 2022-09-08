@@ -42,6 +42,35 @@
     <string>com.github.opusmarketing.pkg.BlenderUniversal</string>
     <key>Process</key>
     <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>additional_pkginfo</key>
+                <dict>
+                    <key>installs</key>
+                        <array>
+                            <dict>
+                                <key>CFBundleIdentifier</key>
+                                <string>org.blenderfoundation.blender</string>
+                                <key>CFBundleName</key>
+                                <string>Blender</string>
+                                <key>CFBundleVersion</key>
+                                <string>%version%</string>
+                                <key>minosversion</key>
+                                <string>12.1.0</string>
+                                <key>path</key>
+                                <string>/Applications/Blender.app</string>
+                                <key>type</key>
+                                <string>application</string>
+                                <key>version_comparison_key</key>
+                                <string>CFBundleVersion</string>
+                            </dict>
+                        </array>
+                </dict>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+        </dict>
       <dict>
           <key>Processor</key>
           <string>MunkiImporter</string>
