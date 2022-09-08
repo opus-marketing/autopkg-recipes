@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest version of Blender and builds an installer package which installs the correct version for your Mac's processor.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.pkg.BlenderUniversal</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Blender</string>
+		<key>NAMEWITHOUTSPACES</key>
+		<string>Blender</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.opusmarketing.download.BlenderUniversal</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/intel/*.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgdirs</key>
+				<dict/>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/Intel</string>
+			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+		</dict> 
+		<dict>
+			<key>Processor</key>
+			<string>AppPkgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>app_path</key>
+				<string>%found_filename%/Blender.app</string>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/Intel/%NAMEWITHOUTSPACES%-Intel-%version%.pkg</string>
+			</dict>
+		</dict>
+<!--         <dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/payload</string>
+				</array>
+			</dict>
+		</dict> -->
+		<dict>
+			<key>Processor</key>
+			<string>FileFinder</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pattern</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/applesilicon/*.dmg</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkgdirs</key>
+				<dict/>
+				<key>pkgroot</key>
+				<string>%RECIPE_CACHE_DIR%/AppleSilicon</string>
+			</dict>
+			<key>Processor</key>
+			<string>PkgRootCreator</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>AppPkgCreator</string>
+			<key>Arguments</key>
+			<dict>
+				<key>app_path</key>
+				<string>%found_filename%/Blender.app</string>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/AppleSilicon/%NAMEWITHOUTSPACES%-AppleSilicon-%version%.pkg</string>
+			</dict>
+		</dict>
+<!--         <dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/payload</string>
+				</array>
+			</dict>
+		</dict> -->
+		<dict>
+			<key>Processor</key>
+            <string>PkgRootCreator</string>
+            <key>Arguments</key>
+            <dict>
+               <key>pkgroot</key>
+               <string>%RECIPE_CACHE_DIR%/Universal/Scripts</string>
+               <key>pkgdirs</key>
+               <dict />
+            </dict>
+         </dict>
+         <dict>
+            <key>Processor</key>
+            <string>PkgRootCreator</string>
+            <key>Arguments</key>
+            <dict>
+               <key>pkgroot</key>
+               <string>%RECIPE_CACHE_DIR%/Universal/pkgroot</string>
+               <key>pkgdirs</key>
+               <dict />
+            </dict>
+         </dict>
+         <dict>
+            <key>Processor</key>
+            <string>FileMover</string>
+            <key>Arguments</key>
+            <dict>
+               <key>source</key>
+               <string>%RECIPE_CACHE_DIR%/AppleSilicon/%NAMEWITHOUTSPACES%-AppleSilicon-%version%.pkg</string>
+               <key>target</key>
+               <string>%RECIPE_CACHE_DIR%/Universal/Scripts/%NAMEWITHOUTSPACES%-AppleSilicon-%version%.pkg</string>
+               <key>overwrite</key>
+               <false />
+            </dict>
+         </dict>
+         <dict>
+            <key>Processor</key>
+            <string>FileMover</string>
+            <key>Arguments</key>
+            <dict>
+               <key>source</key>
+               <string>%RECIPE_CACHE_DIR%/Intel/%NAMEWITHOUTSPACES%-Intel-%version%.pkg</string>
+               <key>target</key>
+               <string>%RECIPE_CACHE_DIR%/Universal/Scripts/%NAMEWITHOUTSPACES%-Intel-%version%.pkg</string>
+               <key>overwrite</key>
+               <false />
+            </dict>
+         </dict>
+         <dict>
+            <key>Processor</key>
+            <string>FileCreator</string>
+            <key>Arguments</key>
+            <dict>
+               <key>file_path</key>
+               <string>%RECIPE_CACHE_DIR%/Universal/Scripts/preinstall</string>
+               <key>file_mode</key>
+               <string>0755</string>
+               <key>file_content</key>
+               <string>#!/bin/bash
+
+# Determine working directory
+
+installDir=$(dirname $0)
+
+# Identify installer package names
+
+Intel_pkg="%NAMEWITHOUTSPACES%-Intel-%version%.pkg"
+AppleSilicon_pkg="%NAMEWITHOUTSPACES%-AppleSilicon-%version%.pkg"
+
+# Determine if this Mac has an Intel or Apple Silicon processor
+
+processor=$(/usr/sbin/sysctl -n machdep.cpu.brand_string | grep -o "Intel")
+
+if [[ -n "$processor" ]]; then
+
+/usr/sbin/installer -pkg "$Intel_pkg" -target "$3"
+
+else
+
+/usr/sbin/installer -pkg "$AppleSilicon_pkg" -target "$3"
+
+fi
+
+exit 0</string>
+            </dict>
+         </dict>
+         <dict>
+            <key>Processor</key>
+            <string>PkgCreator</string>
+            <key>Arguments</key>
+            <dict>
+               <key>pkg_request</key>
+               <dict>
+                  <key>pkgname</key>
+                  <string>%NAMEWITHOUTSPACES%-Universal-%version%</string>
+                  <key>version</key>
+                  <string>%version%</string>
+                  <key>id</key>
+                  <string>de.crown.ccs.app.universal</string>
+                  <key>scripts</key>
+                  <string>%RECIPE_CACHE_DIR%/Universal/Scripts</string>
+                  <key>options</key>
+                  <string>purge_ds_store</string>
+               </dict>
+            </dict>
+         </dict>
+ 		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/AppleSilicon</string>
+					<string>%RECIPE_CACHE_DIR%/Intel</string>
+					<string>%RECIPE_CACHE_DIR%/Universal</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
