@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Saber After Effects Plugin and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>local.munki.SaberAEPlugin</string>
+	<string>com.github.opusmarketing.munki.SaberAEPlugin</string>
 	<key>Input</key>
 	<dict>
 		<key>MUNKI_REPO_SUBDIR</key>
@@ -19,7 +19,7 @@
 				<string>default</string>
 			</array>
 			<key>description</key>
-			<string>Create Energy Beams Lightsabers Lasers Portals Neon Lights Electric Haze and more</string>
+			<string>Create Energy Beams Lightsabers Lasers Portals Neon Lights Electric Haze and more.</string>
 			<key>developer</key>
 			<string>Video Copilot</string>
 			<key>display_name</key>
@@ -33,20 +33,20 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>local.pkg.SaberAEPlugin</string>
+	<string>com.github.opusmarketing.pkg.SaberAEPlugin</string>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
-				<key>repo_subdirectory</key>
-				<string>%MUNKI_REPO_SUBDIR%</string>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiImporter</string>
-		</dict>
+      <dict>
+          <key>Processor</key>
+          <string>MunkiImporter</string>
+          <key>Arguments</key>
+          <dict>
+              <key>pkg_path</key>
+              <string>%RECIPE_CACHE_DIR%/%PKG_NAME%-%version%.pkg</string>
+              <key>repo_subdirectory</key>
+              <string>%MUNKI_REPO_SUBDIR%</string>
+          </dict>
+      </dict>
 	</array>
 </dict>
 </plist>
