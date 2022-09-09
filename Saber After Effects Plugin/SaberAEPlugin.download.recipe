@@ -5,7 +5,7 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Saber After Effects Plugin.</string>
 	<key>Identifier</key>
-	<string>local.download.SaberAEPlugin</string>
+	<string>com.github.opusmarketing.download.SaberAEPlugin</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
@@ -20,38 +20,29 @@
 			<dict>
 				<key>url</key>
 				<string>https://www.videocopilot.net/dl/zu2TeXAuya/</string>
-                <key>filename</key>
-                <string>SaberInstaller.dmg</string>
+				<key>prefetch_filename</key>
+				<true/>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
+			<string>com.github.jazzace.processors/TextSearcher</string>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>_([\d.]+)_</string>
+				<key>result_output_var_name</key>
+				<string>version</string>
+				<key>text_in</key>
+				<string>%pathname%</string>
+			</dict>
 		</dict>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_path</key>
-				<string>%pathname%/%filename%.app</string>
-				<key>requirement</key>
-				<string>identifier "net.videocopilot.vcinstaller" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "462FK78NZ8"</string>
-			</dict>
 			<key>Processor</key>
-			<string>CodeSignatureVerifier</string>
+			<string>EndOfCheckPhase</string>
 		</dict>
-<!-- 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%pathname%/BigPicture 2022.app/Contents/Info.plist</string>
-				<key>plist_version_key</key>
-				<string>CFBundleShortVersionString</string>
-			</dict>
-			<key>Processor</key>
-			<string>Versioner</string>
-		</dict> -->
 	</array>
 </dict>
 </plist>
