@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of OpenColorIO for After Effects and creates a package.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.pkg.OpenColorIOAE</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>OpenColorIO for After Effects</string>
+		<key>PKG_NAME</key>
+		<string>OpenColorIOAE</string>
+		<key>PKG_ID</key>
+		<string>org.OpenColorIO.AfterEffects</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.opusmarketing.download.OpenColorIOAE</string>
+	<key>Process</key>
+	<array>
+		<dict>
+            <key>Arguments</key>
+			    <dict>
+				    <key>source_path</key>
+                    <string>%pathname%/%found_basename%</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/payload/Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore/Public/%found_basename%</string>
+					<key>overwrite</key>
+					<true/>
+                </dict>
+			<key>Processor</key>
+			<string>Copier</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>destination path for pkg is /Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore/Public with 755 for plugin and 775 for folders. </string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_request</key>
+                <dict>
+                    <key>pkgroot</key>
+                    <string>%RECIPE_CACHE_DIR%/payload</string>
+                    <key>pkgdir</key>
+                    <string>%RECIPE_CACHE_DIR%</string>
+                    <key>pkgname</key>
+                    <string>%PKG_NAME%-%version%</string>
+                    <key>id</key>
+                    <string>%PKG_ID%</string>
+                    <key>version</key>
+                    <string>%version%</string>
+                    <key>options</key>
+                    <string>purge_ds_store</string>
+                    <key>chown</key>
+                    <array>
+                         <dict>
+                            <key>path</key>
+                            <string>Library</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+                        <dict>
+                            <key>path</key>
+                            <string>Library/Application Support/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>admin</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+						<dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+						<dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/Common/Plug-ins/7.0/MediaCore/Public/%found_basename%</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+                    </array>
+                </dict>
+            </dict>
+			<key>Processor</key>
+            <string>PkgCreator</string>
+        </dict>
+ 		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/payload</string>
+				</array>
+			</dict>
+		</dict>  
+	</array>
+</dict>
+</plist>
