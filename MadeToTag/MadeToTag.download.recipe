@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest version of MadeToTag for InDesign 2022.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.download.MadeToTagInDesign2022</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>MadeToTag for InDesign 2022</string>
+        <key>INDESIGN_VERSION</key>
+        <string>2022</string>
+		<key>SEARCH_URL</key>
+		<string>https://www.axaio.com/doku.php/de:download</string>
+		<key>SEARCH_VERSION</key>
+		<string>http://www.axaio.com/doku.php/de:download:form\?product=MadeToTag_InDesign_%INDESIGN_VERSION%&amp;___&amp;platform=Mac&amp;version=(?P&lt;versionqueryparam&gt;.*?)&amp;purge=true&amp;purge=true</string>
+<!-- 		<key>SEARCH_DOWNLOADURL</key>
+		<string>https://www.axaio.com/doku.php/de:download:thanks\?product=MadeToTag_InDesign_%INDESIGN_VERSION%&amp;platform=Mac&amp;version=</string> -->
+        <key>DOWNLOAD_URL</key>
+		<string>https://www.axaio.com/adownloads/software/MadeToTag_InDesign_%INDESIGN_VERSION%_Mac_</string>        
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.1</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>%SEARCH_VERSION%</string>
+				<key>url</key>
+				<string>%SEARCH_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+        <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/</string>
+				<key>url</key>
+				<string>%DOWNLOAD_URL%(%versionqueryparam%).pkg</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict> 
+        <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Application: axaio software GmbH (G5FHR2G7YZ)</string>
+					<string>Developer ID Certification Authority</string>
+					<string>Apple Root CA</string>
+				</array>
+				<key>input_path</key>
+				<string>%pathname%</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+	</array>
+</dict>
+</plist>
