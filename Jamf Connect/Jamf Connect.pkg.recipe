@@ -43,17 +43,6 @@
                 <true/>
             </dict>
         </dict>
-<!--         <dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/payload/Applications/Jamf Connect.app/Contents/Info.plist</string>
-				<key>plist_version_key</key>
-				<string>CFBundleShortVersionString</string>
-			</dict>
-			<key>Processor</key>
-			<string>Versioner</string>
-	    </dict> -->
         <dict>
             <key>Processor</key>
             <string>PlistReader</string>
@@ -70,6 +59,31 @@
                 </dict>
             </dict>
         </dict> 
+       <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/payload/Applications/Jamf Connect.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleShortVersionString</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+	    </dict>
+         <dict>
+            <key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+            <key>Arguments</key>
+            <dict>
+                <key>additional_pkginfo</key>
+                <dict>
+                <key>minimum_os_version</key>
+                    <string>%min_os_version%</string> 
+                    <key>version</key>
+                    <string>%version%</string>
+                </dict>
+            </dict>
+        </dict>
         <dict>
             <key>Processor</key>
             <string>PathDeleter</string>
@@ -93,23 +107,6 @@
                 <string>%pathname%/JamfConnect.pkg</string>
             </dict>
         </dict>
-
-<!--     
-        <dict>
-            <key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-            <key>Arguments</key>
-            <dict>
-                <key>additional_pkginfo</key>
-                <dict>
-                <key>minimum_os_version</key>
-                    <string>%min_os_version%</string> 
-                    <key>version</key>
-                    <string>%version%</string>
-                </dict>
-            </dict>
-        </dict>
-		-->
 	</array>
 </dict>
 </plist>

@@ -28,6 +28,9 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<true/>
+			<key>postinstall_script</key>
+			<string>#!/bin/bash
+sudo killall "Jamf Connect"</string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
