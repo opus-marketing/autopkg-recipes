@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of Jamf Connect and imports it into Munki.</string>
 	<key>Identifier</key>
@@ -16,20 +14,12 @@
 		<string>Jamf Connect</string>
 		<key>pkginfo</key>
 		<dict>
-			<key>blocking_applications</key>
-			<array>
-				<string>UnlockLogin.app</string>
-				<string>Jamf Connect.app</string>
-				<string>LaunchAtLoginHelper.app</string>
-				<string>LauncherApplication.app</string>
-				<string>JCDaemon.app</string>
-			</array>
 			<key>catalogs</key>
 			<array>
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string> </string>
+			<string>Jamf Connect is a collection of apps allowing for simple provisioning of local user accounts and password synchronization from a cloud identity provider (IdP) during an Apple provisioning workflow. This includes multi-factor authentication (MFA).</string>
 			<key>developer</key>
 			<string>JAMF Software</string>
 			<key>display_name</key>
@@ -43,14 +33,14 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.download.JamfConnect</string>
+	<string>com.github.opusmarketing.pkg.JamfConnect</string>
 	<key>Process</key>
 	<array>
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>pkg_path</key>
-				<string>%pathname%</string>
+                <key>pkg_path</key>
+                <string>%pkg_path%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
