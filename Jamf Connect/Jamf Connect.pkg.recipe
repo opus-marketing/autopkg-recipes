@@ -41,6 +41,7 @@
                 <string>%RECIPE_CACHE_DIR%/unpack/JamfConnect.pkg/Payload</string>
                 <key>purge_destination</key>
                 <true/>
+            </dict>
         </dict>
 <!--         <dict>
 			<key>Arguments</key>
