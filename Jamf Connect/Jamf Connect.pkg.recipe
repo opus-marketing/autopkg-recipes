@@ -17,7 +17,7 @@
 	<string>com.github.opusmarketing.download.JamfConnect</string>
 	<key>Process</key>
 	<array>
-<!--         <dict>
+        <dict>
             <key>Processor</key>
             <string>FlatPkgUnpacker</string>
             <key>Arguments</key>
@@ -41,10 +41,8 @@
                 <string>%RECIPE_CACHE_DIR%/unpack/JamfConnect.pkg/Payload</string>
                 <key>purge_destination</key>
                 <true/>
-            </dict>
-        </dict> -->
-
-<!-- 		<dict>
+        </dict>
+<!--         <dict>
 			<key>Arguments</key>
 			<dict>
 				<key>input_plist_path</key>
@@ -54,9 +52,8 @@
 			</dict>
 			<key>Processor</key>
 			<string>Versioner</string>
-		</dict> -->
-
-<!--         <dict>
+	    </dict> -->
+        <dict>
             <key>Processor</key>
             <string>PlistReader</string>
             <key>Arguments</key>
@@ -71,9 +68,19 @@
                     <string>min_os_version</string>
                 </dict>
             </dict>
-        </dict> -->
-
-
+        </dict> 
+        <dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>path_list</key>
+                <array>
+                    <string>%RECIPE_CACHE_DIR%/unpack</string>
+                    <string>%RECIPE_CACHE_DIR%/payload</string>
+                </array>
+            </dict>
+        </dict>
         <dict>
             <key>Processor</key>
             <string>PkgCopier</string>
@@ -102,18 +109,6 @@
             </dict>
         </dict>
 		-->
-<!--         <dict>
-            <key>Processor</key>
-            <string>PathDeleter</string>
-            <key>Arguments</key>
-            <dict>
-                <key>path_list</key>
-                <array>
-                    <string>%RECIPE_CACHE_DIR%/unpack</string>
-                    <string>%RECIPE_CACHE_DIR%/payload</string>
-                </array>
-            </dict>
-        </dict> -->
 	</array>
 </dict>
 </plist>
