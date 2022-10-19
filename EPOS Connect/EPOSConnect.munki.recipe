@@ -12,6 +12,8 @@
         <string>EPOS Connect</string>
         <key>NAMEWITHOUTSPACES</key>
 		<string>EPOSConnect</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/%NAME%</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -41,6 +43,8 @@
           <dict>
               <key>pkg_path</key>
               <string>%pathname%</string>
+              <key>repo_subdirectory</key>  
+              <string>%MUNKI_REPO_SUBDIR%</string>
           </dict>
       </dict>
     </array>
