@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest version of the Monotype App.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.download.MonotypeApp</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Monotype App</string>
+		<key>INTEL_ARCHITECTURE</key>
+		<string></string>
+		<key>APPLE_SILICON_ARCHITECTURE</key>
+		<string>arm</string>
+		<key>SEARCH_URL</key>
+		<string>https://enterprise.monotype.com/help-center/getting-started/syncing-installing-fonts-monotype-app#downloading</string>
+		<key>INTEL_SEARCH_PATTERN</key>
+		<string>(?P&lt;url&gt;https://s3.amazonaws.com/monotype-app/installers%INTEL_ARCHITECTURE%/monotypedesktopapp_pkg.zip)</string>
+		<key>APPLE_SILICON_SEARCH_PATTERN</key>
+		<string>(?P&lt;url&gt;https://monotype-app.s3.amazonaws.com/installers%APPLE_SILICON_ARCHITECTURE%/monotypedesktopapp_pkg.zip)</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.2.1</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>%INTEL_SEARCH_PATTERN%</string>
+				<key>url</key>
+				<string>%SEARCH_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/intel</string>
+				<key>url</key>
+				<string>%url%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>archive_path</key>
+                <string>%pathname%</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/intel</string>
+            </dict>
+            <key>Processor</key>
+            <string>Unarchiver</string>
+        </dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Installer: Monotype Imaging, Inc (CY8P5TW3Y2)</string>
+					<string>Developer ID Certification Authority</string>
+					<string>Apple Root CA</string>
+				</array>
+				<key>input_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/intel/*.pkg</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>%APPLE_SILICON_SEARCH_PATTERN%</string>
+				<key>url</key>
+				<string>%SEARCH_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/applesilicon</string>
+				<key>url</key>
+				<string>%url%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>archive_path</key>
+                <string>%pathname%</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/applesilicon</string>
+            </dict>
+            <key>Processor</key>
+            <string>Unarchiver</string>
+        </dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>expected_authority_names</key>
+				<array>
+					<string>Developer ID Installer: Monotype Imaging, Inc (CY8P5TW3Y2)</string>
+					<string>Developer ID Certification Authority</string>
+					<string>Apple Root CA</string>
+				</array>
+				<key>input_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/applesilicon/*.pkg</string>
+			</dict>
+			<key>Processor</key>
+			<string>CodeSignatureVerifier</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict>
+	</array>
+</dict>
+</plist>
