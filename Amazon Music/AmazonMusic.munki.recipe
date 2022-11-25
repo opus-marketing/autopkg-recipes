@@ -36,7 +36,7 @@
     		<true/>
             <key>postinstall_script</key>
             <string>#!/bin/bash
-sudo /private/tmp/Amazon Music Installer.app/Contents/MacOS/osx-x86_64 --unattendedmodeui none
+sudo /private/tmp/Amazon\ Music\ Installer.app/Contents/MacOS/osx-x86_64 --unattendedmodeui none
 exit 0
         </string>
     	</dict>
@@ -47,17 +47,6 @@ exit 0
     <string>com.github.opusmarketing.download.AmazonMusic</string>
     <key>Process</key>
     <array>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>input_plist_path</key>
-                <string>%RECIPE_CACHE_DIR%/downloads/%NAME%.dmg/Amazon Music Installer.app/Contents/Info.plist</string>
-                <key>plist_version_key</key>
-                <string>CFBundleVersion</string>
-            </dict>
-            <key>Processor</key>
-            <string>Versioner</string>
-        </dict>
         <dict>
             <key>Arguments</key>
             <dict>
