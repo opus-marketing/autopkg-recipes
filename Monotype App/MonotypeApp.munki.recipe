@@ -100,6 +100,11 @@
         	<dict>
             	<key>pkg_path</key>
             	<string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
+				<key>pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
             	<key>repo_subdirectory</key>
             	<string>%MUNKI_REPO_SUBDIR%</string>
           	</dict>
