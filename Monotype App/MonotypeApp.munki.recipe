@@ -28,16 +28,6 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<false/>
-            <key>postuninstall_script</key>
-            <string>#!/bin/sh
-/Applications/Monotype\ desktop\ app/uninstall.app/Contents/MacOS/installbuilder.sh --mode unattended --unattendedmodeui none
-pkgutil --forget com.monotype.mtf.app.desktop.silent
-if [ -d /Applications/Monotype\ desktop\ app/ ]; 
-then 
-rm -rf /Applications/Monotype\ desktop\ app/
-fi
-exit 0
-            </string>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
@@ -52,7 +42,7 @@ exit 0
           <key>Arguments</key>
           <dict>
               <key>pkg_path</key>
-              <string>%pkg_path%</string>
+              <string>%pathname%</string>
               <key>repo_subdirectory</key>
               <string>%MUNKI_REPO_SUBDIR%</string>
           </dict>
