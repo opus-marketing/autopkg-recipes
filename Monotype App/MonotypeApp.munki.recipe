@@ -111,6 +111,20 @@
     	<dict>
         	<key>Arguments</key>
         	<dict>
+				<key>installs_item_paths</key>
+				<array>
+					<string>/Applications/Monotype desktop app/Monotype desktop app.app</string>
+				</array>
+				<key>version_comparison_key</key>
+				
+			</dict>
+			<key>Processor</key>
+        	<string>MunkiInstallsItemsCreator</string>
+      </dict>
+
+    	<dict>
+        	<key>Arguments</key>
+        	<dict>
             	<key>pkg_path</key>
             	<string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
             	<key>repo_subdirectory</key>
