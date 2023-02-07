@@ -116,7 +116,9 @@
 					<string>/Applications/Monotype desktop app/Monotype desktop app.app</string>
 				</array>
 				<key>version_comparison_key</key>
-				
+				<dict>
+					<string>CFBundleShortVersionString</string>
+				</dict>
 			</dict>
 			<key>Processor</key>
         	<string>MunkiInstallsItemsCreator</string>
