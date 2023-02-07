@@ -73,41 +73,6 @@
             <string>Unarchiver</string>
     	</dict>
 
-     	<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/DTAppInstaller.app/Contents/Info.plist</string>
-			</dict>
-			<key>Processor</key>
-			<string>Versioner</string>
-		</dict>
-
-		<dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>path_list</key>
-				<array>
-					<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
-				</array>
-			</dict>
-		</dict>
-
-    	<dict>
-        	<key>Arguments</key>
-        	<dict>
-				<key>additional_pkginfo</key>
-				<dict>
-					<key>version</key>
-					<string>%version%</string>
-				</dict>
-			</dict>
-			<key>Processor</key>
-        	<string>MunkiPkginfoMerger</string>
-      </dict>
-
     	<dict>
         	<key>Arguments</key>
         	<dict>
@@ -120,12 +85,47 @@
 			</dict>
 			<key>Processor</key>
         	<string>MunkiInstallsItemsCreator</string>
-      </dict>
+    	</dict>
 
-	    <dict>
+		<dict>
     		<key>Processor</key>
     		<string>MunkiPkginfoMerger</string>
     	</dict>
+
+ 		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/DTAppInstaller.app/Contents/Info.plist</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+		</dict>
+		
+    	<dict>
+        	<key>Arguments</key>
+        	<dict>
+				<key>additional_pkginfo</key>
+				<dict>
+					<key>version</key>
+					<string>%version%</string>
+				</dict>
+			</dict>
+			<key>Processor</key>
+        	<string>MunkiPkginfoMerger</string>
+    	</dict>
+
+		<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
+				</array>
+			</dict>
+		</dict>
 
     	<dict>
         	<key>Arguments</key>
