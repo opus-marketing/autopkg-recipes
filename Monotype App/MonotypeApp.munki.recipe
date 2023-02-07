@@ -117,7 +117,7 @@
 				</array>
 				<key>version_comparison_key</key>
 				<dict>
-					<string>CFBundleShortVersionString</string>
+					<key>CFBundleShortVersionString</key>
 				</dict>
 			</dict>
 			<key>Processor</key>
