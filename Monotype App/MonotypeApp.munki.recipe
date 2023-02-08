@@ -56,6 +56,8 @@ set -x
 #sudo "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/"$macarm --mode unattended
 #fi
 sudo pkill "Monotype desktop app"
+sudo pkill "Monotype Fonts App Helper"
+sudo pkill "Monotype Fonts App Helper (GPU)"
 sudo "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/installbuilder.sh"
 pkgutil --unlink com.monotype.mtf.app.desktop.silent
 pkgutil --forget com.monotype.mtf.app.desktop.silent
