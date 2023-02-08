@@ -3,20 +3,171 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads latest version of the Monotype App and creates a package.</string>
+	<string>Downloads latest version of the Monotype App and builds an installer package which installs the correct version for your Mac's processor.</string>
 	<key>Identifier</key>
 	<string>com.github.opusmarketing.pkg.MonotypeApp</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>Monotype App</string>
+		<key>NAMEWITHOUTSPACES</key>
+		<string>MonotypeApp</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
 	<string>com.github.opusmarketing.download.MonotypeApp</string>
 	<key>Process</key>
-   <array>
+	<array>
+		
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
+			</dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+		</dict>
+
+     	<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/Payload</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/</string>
+			</dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+		</dict>
+
+     	<dict>
+            <key>Arguments</key>
+            <dict>
+                <key>archive_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app.zip</string>
+                <key>destination_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/</string>
+            </dict>
+            <key>Processor</key>
+            <string>Unarchiver</string>
+      	</dict>
+
+      	<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/DTAppInstaller.app/Contents/Info.plist</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+		</dict>
+
+    	<dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
+				</array>
+			</dict>
+		</dict>
+
+		<dict>
+			<key>Processor</key>
+            <string>PkgRootCreator</string>
+            <key>Arguments</key>
+            <dict>
+               <key>pkgroot</key>
+               <string>%RECIPE_CACHE_DIR%/repackage/Scripts</string>
+               <key>pkgdirs</key>
+               <dict />
+            </dict>
+      </dict>
+      <dict>
+         <key>Processor</key>
+         <string>PkgRootCreator</string>
+         <key>Arguments</key>
+         <dict>
+            <key>pkgroot</key>
+            <string>%RECIPE_CACHE_DIR%/repackage/pkgroot</string>
+            <key>pkgdirs</key>
+            <dict />
+         </dict>
+      </dict>
+
+      <dict>
+         <key>Processor</key>
+         <string>FileMover</string>
+         <key>Arguments</key>
+         <dict>
+            <key>source</key>
+            <string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
+            <key>target</key>
+            <string>%RECIPE_CACHE_DIR%/repackage/Scripts/%NAMEWITHOUTSPACES%-%version%.pkg</string>
+            <key>overwrite</key>
+            <false />
+         </dict>
+      </dict>
+
+      <dict>
+         <key>Processor</key>
+         <string>FileCreator</string>
+         <key>Arguments</key>
+         <dict>
+            <key>file_path</key>
+            <string>%RECIPE_CACHE_DIR%/repackage/Scripts/preinstall</string>
+            <key>file_mode</key>
+            <string>0755</string>
+            <key>file_content</key>
+            <string>#!/bin/bash
+# Determine working directory
+installDir=$(dirname $0)
+# Install original package
+/usr/sbin/installer -pkg %NAMEWITHOUTSPACES%-%version%.pkg -target "$3"
+exit 0</string>
+      </dict>
+   </dict>
+
+   <dict>
+      <key>Processor</key>
+      <string>PkgCreator</string>
+      <key>Arguments</key>
+      <dict>
+         <key>pkg_request</key>
+            <dict>
+               <key>pkgname</key>
+               <string>%NAMEWITHOUTSPACES%-%version%</string>
+               <key>version</key>
+               <string>%version%</string>
+               <key>id</key>
+               <string>com.monotype.mtf.app.desktop.silent.repackage</string>
+               <key>scripts</key>
+               <string>%RECIPE_CACHE_DIR%/repackage/Scripts</string>
+               <key>options</key>
+               <string>purge_ds_store</string>
+            </dict>
+         </dict>
+      </dict>
+
+      <dict>
+			<key>Processor</key>
+			<string>PathDeleter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>path_list</key>
+				<array>
+					<string>%RECIPE_CACHE_DIR%/repackage</string>
+             		<string>%RECIPE_CACHE_DIR%/unpacked</string>
+				</array>
+			</dict>
+		</dict>
+
 	</array>
 </dict>
 </plist>
