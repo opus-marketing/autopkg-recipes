@@ -13,7 +13,7 @@
 		<key>SEARCH_URL</key>
 		<string>https://www.eposaudio.com/de/de/enterprise/software/epos-connect</string>
 		<key>SEARCH_PATTERN</key>
-        <string>(?P&lt;DOWNLOAD_URL&gt;https://www.eposaudio.com/globalassets/___image-library/_enterprise/files/english/epos-connect/epos-connect-[0-9a-zA-Z\.]+/eposconnect_(?P&lt;version&gt;.*?).pkg)</string>
+        <string>(?P&lt;DOWNLOAD_URL&gt;https://www.eposaudio.com/globalassets/_enterprise_media/software/epos-connect/mac/epos-connect-[0-9a-zA-Z\.]+/eposconnect_(?P&lt;version&gt;.*?).pkg)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.1</string>
