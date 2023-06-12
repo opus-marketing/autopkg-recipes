@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads latest version of Blender.</string>
+	<string>Downloads latest version of Blender for Intel and Apple Silicon.</string>
 	<key>Identifier</key>
 	<string>com.github.opusmarketing.download.BlenderUniversal</string>
 	<key>Input</key>
