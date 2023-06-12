@@ -39,10 +39,10 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>https://www.blender.org/download/release/%download_path%</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;https://.*/blender-(?P&lt;version&gt;[0-9a-zA-Z\.]+)-macos-%INTEL_ARCHITECTURE%.dmg)</string>
+				<string>"(?P&lt;url&gt;https://.*/blender-(?P&lt;version&gt;[0-9a-zA-Z\.]+)-macos-%INTEL_ARCHITECTURE%.dmg)"</string>
+				<key>url</key>
+				<string>https://www.blender.org/download/%download_path%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
@@ -73,8 +73,6 @@
 			<key>Processor</key>
 			<string>EndOfCheckPhase</string>
 		</dict>
-
-
 		<dict>
 			<key>Arguments</key>
 			<dict>
@@ -89,10 +87,10 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>url</key>
-				<string>https://www.blender.org/download/release/%download_path%</string>
 				<key>re_pattern</key>
-				<string>(?P&lt;url&gt;https://.*/blender-(?P&lt;version&gt;[0-9a-zA-Z\.]+)-macos-%APPLE_SILICON_ARCHITECTURE%.dmg)</string>
+				<string>"(?P&lt;url&gt;https://.*/blender-(?P&lt;version&gt;[0-9a-zA-Z\.]+)-macos-%APPLE_SILICON_ARCHITECTURE%.dmg)"</string>
+				<key>url</key>
+				<string>https://www.blender.org/download/%download_path%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLTextSearcher</string>
