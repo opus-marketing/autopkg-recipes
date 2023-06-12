@@ -17,9 +17,9 @@
 		<key>SEARCH_URL</key>
 		<string>https://www.blender.org/download/</string>
 		<key>INTEL_SEARCH_PATTERN</key>
-		<string>(?P&lt;download_path&gt;Blender[0-9a-zA-Z\.]+/blender-(?P&lt;version&gt;.*?)-macos-%INTEL_ARCHITECTURE%.dmg)</string>
+		<string>(?P&lt;download_path&gt;release/Blender[0-9a-zA-Z\.]+/blender-(?P&lt;version&gt;.*?)-macos-%INTEL_ARCHITECTURE%.dmg)</string>
 		<key>APPLE_SILICON_SEARCH_PATTERN</key>
-		<string>(?P&lt;download_path&gt;Blender[0-9a-zA-Z\.]+/blender-(?P&lt;version&gt;.*?)-macos-%APPLE_SILICON_ARCHITECTURE%.dmg)</string>
+		<string>(?P&lt;download_path&gt;release/Blender[0-9a-zA-Z\.]+/blender-(?P&lt;version&gt;.*?)-macos-%APPLE_SILICON_ARCHITECTURE%.dmg)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.1</string>
