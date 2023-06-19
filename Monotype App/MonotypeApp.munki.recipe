@@ -66,13 +66,13 @@ pkgutil --forget com.monotype.mtf.app.desktop.silent
 					<string>#!/bin/bash
 OIFS="$IFS"
 IFS=$'\n'
-for indesign in $(cd /Applications && ls -d1 *InDesign*); do
-	if ls -d1 "/Applications/$indesign/"*.app > /dev/null 2> /dev/null;
+for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
+	if ls -d1 "/Applications/$indesign/"*.app &gt; /dev/null 2&gt; /dev/null;
 	then
 		echo $indesign "is present."
 		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
 		echo "InDesign version number:" $indesignversion
-		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" && ls -1); do
+		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" &amp;&amp; ls -1); do
 			if [ $pluginversion == $indesignversion ]; then
 				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
 					echo "Deleting old InDesign Plugin..."
@@ -80,7 +80,7 @@ for indesign in $(cd /Applications && ls -d1 *InDesign*); do
 				fi
 				echo "Copying InDesign Plugin version $pluginversion to $indesign..."
 				unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_indesign/$pluginversion/*.zip" -d /tmp/
-				for pluginfile in $(cd /tmp/ && ls -d1 *.InDesignPlugin); do
+				for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *.InDesignPlugin); do
 					sudo mv -f /tmp/$pluginfile /Applications/$indesign/Plug-Ins/
 					sudo chown -R root:admin /Applications/$indesign/Plug-Ins/$pluginfile
 					sudo chmod 755 /Applications/$indesign/Plug-Ins/$pluginfile
@@ -92,8 +92,8 @@ for indesign in $(cd /Applications && ls -d1 *InDesign*); do
 		echo "$indesign is orphaned."
 	fi
 done
-for photoshop in $(cd /Applications && ls -d1 *Photoshop*); do
-	if ls -d1 "/Applications/$photoshop/"*.app > /dev/null 2> /dev/null;
+for photoshop in $(cd /Applications &amp;&amp; ls -d1 *Photoshop*); do
+	if ls -d1 "/Applications/$photoshop/"*.app &gt; /dev/null 2&gt; /dev/null;
 	then
 		echo $photoshop "is present."
 		if [ -d "/Applications/$photoshop/Plug-Ins/"*Monotype*.plugin ]; then
@@ -104,7 +104,7 @@ for photoshop in $(cd /Applications && ls -d1 *Photoshop*); do
 		echo "Copying Photoshop Plugin to $photoshop..."
 		sudo rm -rf "/Applications/$photoshop/Plug-Ins/"*Monotype*.plugin
 		unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_photoshop/*.zip" -d /tmp/
-		for pluginfile in $(cd /tmp/ && ls -d1 *Monotype*.plugin); do
+		for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *Monotype*.plugin); do
 			sudo mv -f /tmp/$pluginfile /Applications/$photoshop/Plug-Ins/
 			sudo chown -R root:admin /Applications/$photoshop/Plug-Ins/$pluginfile
 			sudo chmod 755 /Applications/$photoshop/Plug-Ins/$pluginfile
