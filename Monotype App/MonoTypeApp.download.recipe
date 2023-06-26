@@ -21,7 +21,7 @@
 				<key>download_dir</key>
 				<string>%RECIPE_CACHE_DIR%/downloads</string>
 				<key>url</key>
-				<string>https://s3.amazonaws.com/monotype-app/installers/monotypedesktopapp_pkg.zip</string>
+				<string>https://monotypeapp.monotype.com/release/latest/mac/system/DTAppInstaller.pkg.zip</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
