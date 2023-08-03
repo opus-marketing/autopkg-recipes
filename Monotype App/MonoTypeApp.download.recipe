@@ -42,7 +42,7 @@
 			<dict>
 				<key>expected_authority_names</key>
 				<array>
-					<string>Developer ID Installer: Monotype Imaging, Inc (CY8P5TW3Y2)</string>
+					<string>Developer ID Installer: Monotype Imaging (9TY7K37N87)</string>
 					<string>Developer ID Certification Authority</string>
 					<string>Apple Root CA</string>
 				</array>
