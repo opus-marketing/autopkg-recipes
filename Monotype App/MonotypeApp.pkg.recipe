@@ -78,29 +78,6 @@
 			</dict>
 		</dict>
 
-		<!-- <dict>
-			<key>Processor</key>
-            <string>PkgRootCreator</string>
-            <key>Arguments</key>
-            <dict>
-               <key>pkgroot</key>
-               <string>%RECIPE_CACHE_DIR%/repackage/Scripts</string>
-               <key>pkgdirs</key>
-               <dict />
-            </dict>
-      </dict>
-      <dict>
-         <key>Processor</key>
-         <string>PkgRootCreator</string>
-         <key>Arguments</key>
-         <dict>
-            <key>pkgroot</key>
-            <string>%RECIPE_CACHE_DIR%/repackage/pkgroot</string>
-            <key>pkgdirs</key>
-            <dict />
-         </dict>
-      </dict> -->
-
       <dict>
          <key>Processor</key>
          <string>FileMover</string>
@@ -109,52 +86,11 @@
             <key>source</key>
             <string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
             <key>target</key>
-            <!-- <string>%RECIPE_CACHE_DIR%/repackage/Scripts/%NAMEWITHOUTSPACES%-%version%.pkg</string> -->
             <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
             <key>overwrite</key>
             <false />
          </dict>
       </dict>
-
-      <!-- <dict>
-         <key>Processor</key>
-         <string>FileCreator</string>
-         <key>Arguments</key>
-         <dict>
-            <key>file_path</key>
-            <string>%RECIPE_CACHE_DIR%/repackage/Scripts/preinstall</string>
-            <key>file_mode</key>
-            <string>0755</string>
-            <key>file_content</key>
-            <string>#!/bin/bash
-# Determine working directory
-installDir=$(dirname $0)
-# Install original package
-/usr/sbin/installer -pkg %NAMEWITHOUTSPACES%-%version%.pkg -target "$3"
-exit 0</string>
-      </dict>
-   </dict> -->
-
-   <!-- <dict>
-      <key>Processor</key>
-      <string>PkgCreator</string>
-      <key>Arguments</key>
-      <dict>
-         <key>pkg_request</key>
-            <dict>
-               <key>pkgname</key>
-               <string>%NAMEWITHOUTSPACES%-%version%</string>
-               <key>version</key>
-               <string>%version%</string>
-               <key>id</key>
-               <string>com.monotype.mtf.app.desktop.silent.repackage</string>
-               <key>scripts</key>
-               <string>%RECIPE_CACHE_DIR%/repackage/Scripts</string>
-               <key>options</key>
-               <string>purge_ds_store</string>
-            </dict>
-         </dict>
-      </dict> -->
 
       <dict>
 			<key>Processor</key>
@@ -163,7 +99,6 @@ exit 0</string>
 			<dict>
 				<key>path_list</key>
 				<array>
-					<!-- <string>%RECIPE_CACHE_DIR%/repackage</string> -->
              	<string>%RECIPE_CACHE_DIR%/unpacked</string>
 				</array>
 			</dict>

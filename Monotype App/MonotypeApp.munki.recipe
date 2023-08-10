@@ -42,37 +42,86 @@
         	<dict>
 				<key>additional_pkginfo</key>
 				<dict>
-					<key>postuninstall_script</key>
-					<string>#!/bin/sh
-set -x
-
-#installername=$(ls "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/" | grep -v -e #installbuilder.sh -e uninstall)
-#macarm=osx-arm64
-#intel=osx-x86_64
-#processor=$(/usr/sbin/sysctl -n machdep.cpu.brand_string | grep -o "Intel")
-#if [[ -n "$processor" ]]; then
-#sudo "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/"$intel --mode unattended
-#else
-#sudo "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/"$macarm --mode unattended
-#fi
-sudo pkill "Monotype desktop app"
-sudo pkill "Monotype Fonts App Helper"
-sudo pkill "Monotype Fonts App Helper (GPU)"
-sudo "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/installbuilder.sh"
-pkgutil --unlink com.monotype.mtf.app.desktop.silent
-pkgutil --forget com.monotype.mtf.app.desktop.silent
-</string>
-					<key>postinstall_script</key>
+					<key>preuninstall_script</key>
 					<string>#!/bin/bash
 OIFS="$IFS"
 IFS=$'\n'
-for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
-	if ls -d1 "/Applications/$indesign/"*.app &gt; /dev/null 2&gt; /dev/null;
+for indesign in $(cd /Applications && ls -d1 *InDesign*); do
+	if ls -d1 "/Applications/$indesign/"*.app > /dev/null 2> /dev/null;
 	then
 		echo $indesign "is present."
 		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
 		echo "InDesign version number:" $indesignversion
-		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" &amp;&amp; ls -1); do
+		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" && ls -1); do
+			if [ $pluginversion == $indesignversion ]; then
+				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
+					echo "Deleting InDesign Plugin..."
+					sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
+				fi
+			fi
+		done
+		echo "Installation of InDesign Plugin(s) complete."
+	else
+		echo "$indesign is orphaned."
+	fi
+done
+IFS="$OIFS"
+</string>
+					<key>postuninstall_script</key>
+					<string>#!/bin/bash
+set -x
+
+file="/Applications/Monotype desktop app/uninstall.app"
+if [ -e "$file" ]
+then
+	echo "$file found."
+    cd "/Applications/Monotype desktop app/uninstall.app/Contents/MacOS/"
+    sudo ./installbuilder.sh --mode unattended --unattendedmodeui none
+else
+	echo "$file not found."
+fi
+</string>
+					<key>preinstall_script</key>
+					<string>#!/bin/bash
+OIFS="$IFS"
+IFS=$'\n'
+for indesign in $(cd /Applications && ls -d1 *InDesign*); do
+	if ls -d1 "/Applications/$indesign/"*.app > /dev/null 2> /dev/null;
+	then
+		echo $indesign "is present."
+		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
+		echo "InDesign version number:" $indesignversion
+		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" && ls -1); do
+			if [ $pluginversion == $indesignversion ]; then
+				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
+					echo "Deleting InDesign Plugin..."
+					sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
+				fi
+			fi
+		done
+		echo "Installation of InDesign Plugin(s) complete."
+	else
+		echo "$indesign is orphaned."
+	fi
+done
+IFS="$OIFS"
+</string>
+					<key>postinstall_script</key>
+					<string>#!/bin/bash
+#set -x
+OIFS="$IFS"
+IFS=$'\n'
+if [ ! -d "/Applications/Monotype desktop app/.addons/adobe_indesign" ]; then
+	echo "Monotype Fonts InDesign Plugin directory not present. Quitting!"
+	exit 1
+fi
+for indesign in $(cd /Applications && ls -d1 *InDesign*); do
+	if ls -d1 "/Applications/$indesign/"*.app > /dev/null 2> /dev/null;
+	then
+		echo $indesign "is present."
+		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
+		echo "InDesign version number:" $indesignversion
+		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" && ls -1); do
 			if [ $pluginversion == $indesignversion ]; then
 				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
 					echo "Deleting old InDesign Plugin..."
@@ -80,7 +129,7 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 				fi
 				echo "Copying InDesign Plugin version $pluginversion to $indesign..."
 				unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_indesign/$pluginversion/*.zip" -d /tmp/
-				for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *.InDesignPlugin); do
+				for pluginfile in $(cd /tmp/ && ls -d1 *.InDesignPlugin); do
 					sudo mv -f /tmp/$pluginfile /Applications/$indesign/Plug-Ins/
 					sudo chown -R root:admin /Applications/$indesign/Plug-Ins/$pluginfile
 					sudo chmod 755 /Applications/$indesign/Plug-Ins/$pluginfile
@@ -92,28 +141,6 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 		echo "$indesign is orphaned."
 	fi
 done
-for photoshop in $(cd /Applications &amp;&amp; ls -d1 *Photoshop*); do
-	if ls -d1 "/Applications/$photoshop/"*.app &gt; /dev/null 2&gt; /dev/null;
-	then
-		echo $photoshop "is present."
-		if [ -d "/Applications/$photoshop/Plug-Ins/"*Monotype*.plugin ]; then
-			echo "Deleting old Photoshop Plugin..."
-			sudo rm -rf "/Applications/$photoshop/Plug-Ins/"*Monotype*.plugin
-			sleep 4
-		fi
-		echo "Copying Photoshop Plugin to $photoshop..."
-		sudo rm -rf "/Applications/$photoshop/Plug-Ins/"*Monotype*.plugin
-		unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_photoshop/*.zip" -d /tmp/
-		for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *Monotype*.plugin); do
-			sudo mv -f /tmp/$pluginfile /Applications/$photoshop/Plug-Ins/
-			sudo chown -R root:admin /Applications/$photoshop/Plug-Ins/$pluginfile
-			sudo chmod 755 /Applications/$photoshop/Plug-Ins/$pluginfile
-		done
-	else
-		echo "$photoshop is orphaned"
-	fi
-done
-echo "Installation of Photoshop Plugin(s) complete."
 IFS="$OIFS"
 </string>
 				</dict>
@@ -126,7 +153,6 @@ IFS="$OIFS"
         	<key>Arguments</key>
         	<dict>
             	<key>pkg_path</key>
-            	<!-- <string>%pkg_path%</string>-->
             	<string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
             	<key>repo_subdirectory</key>
             	<string>%MUNKI_REPO_SUBDIR%</string>
