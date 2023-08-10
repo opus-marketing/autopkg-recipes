@@ -89,16 +89,10 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 	if ls -d1 "/Applications/$indesign/"*.app &gt; /dev/null 2&gt; /dev/null;
 	then
 		echo $indesign "is present."
-		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
-		echo "InDesign version number:" $indesignversion
-		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" &amp;&amp; ls -1); do
-			if [ $pluginversion == $indesignversion ]; then
-				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
-					echo "Deleting InDesign Plugin..."
-					sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
-				fi
-			fi
-		done
+		if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
+			echo "Deleting InDesign Plugin..."
+			sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
+		fi
 		echo "Installation of InDesign Plugin(s) complete."
 	else
 		echo "$indesign is orphaned."
