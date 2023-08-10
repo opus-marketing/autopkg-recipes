@@ -123,10 +123,6 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 		echo "InDesign version number:" $indesignversion
 		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" &amp;&amp; ls -1); do
 			if [ $pluginversion == $indesignversion ]; then
-				if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
-					echo "Deleting old InDesign Plugin..."
-					sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
-				fi
 				echo "Copying InDesign Plugin version $pluginversion to $indesign..."
 				unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_indesign/$pluginversion/*.zip" -d /tmp/
 				for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *.InDesignPlugin); do
