@@ -5,7 +5,8 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Ferdium.
 	
-	Set SUPPORTED_ARCH to 'x64 for the Intel binary or 'arm64' for the Apple Silicon binary.</string>
+Set SUPPORTED_ARCH to 'x86_64 and DOWNLOAD_ARCH to 'x64' for the Intel binary.
+Set SUPPORTED_ARCH and DOWNLOAD_ARCH to 'arm64' for the Apple Silicon binary.</string>
 	<key>Identifier</key>
 	<string>com.github.opusmarketing.download.Ferdium</string>
 	<key>Input</key>
@@ -13,9 +14,9 @@
 		<key>NAME</key>
 		<string>Ferdium</string>
 		<key>DOWNLOAD_ARCH</key>
-		<string></string>
-		<key>SUPPORTED_ARCH</key>
 		<string>x64</string>
+		<key>SUPPORTED_ARCH</key>
+		<string>x86_64</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -25,7 +26,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>asset_regex</key>
-				<string>.*\-%SUPPORTED_ARCH%.dmg$</string>
+				<string>.*\-%DOWNLOAD_ARCH%.dmg$</string>
 				<key>github_repo</key>
 				<string>ferdium/ferdium-app</string>
 			</dict>
@@ -36,7 +37,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>filename</key>
-				<string>%NAME%-%version%-%SUPPORTED_ARCH%.dmg</string>
+				<string>%NAME%-%version%-%DOWNLOAD_ARCH%.dmg</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
