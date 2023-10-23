@@ -2,23 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Installs the latest version of BigPicture.</string>
 	<key>Identifier</key>
-	<string>com.github.opusmarketing.install.BigPicture</string>
+	<string>com.github.opusmarketing.install.BigPicture2024</string>
 	<key>Input</key>
 	<dict>
 		<key>APP_FILENAME</key>
-		<string>BigPicture 2023</string>
+		<string>BigPicture 2024</string>
 		<key>NAME</key>
-		<string>BigPicture 2023</string>
+		<string>BigPicture 2024</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.download.BigPicture</string>
+	<string>com.github.opusmarketing.download.BigPicture2024</string>
 	<key>Process</key>
 	<array>
 		<dict>
@@ -32,7 +30,7 @@
 						<key>destination_path</key>
 						<string>/Applications</string>
 						<key>source_item</key>
-						<string>BigPicture 2023.app</string>
+						<string>%NAME%.app</string>
 					</dict>
 				</array>
 			</dict>

@@ -2,20 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of BigPicture and imports it into Munki.</string>
 	<key>Identifier</key>
-	<string>com.github.opusmarketing.munki.BigPicture</string>
+	<string>com.github.opusmarketing.munki.BigPicture2024</string>
 	<key>Input</key>
 	<dict>
 		<key>APP_FILENAME</key>
-		<string>BigPicture 2023</string>
+		<string>BigPicture 2024</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>BigPicture 2023</string>
+		<string>BigPicture 2024</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
@@ -27,7 +25,7 @@
 			<key>developer</key>
 			<string>Dario Badia</string>
 			<key>display_name</key>
-			<string>BigPicture 2023</string>
+			<string>BigPicture 2024</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -37,7 +35,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.pkg.BigPicture</string>
+	<string>com.github.opusmarketing.pkg.BigPicture2024</string>
 	<key>Process</key>
 	<array>
 		<dict>

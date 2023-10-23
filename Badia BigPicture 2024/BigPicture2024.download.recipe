@@ -2,18 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Comment</key>
-	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of BigPicture.</string>
 	<key>Identifier</key>
-	<string>com.github.opusmarketing.download.BigPicture</string>
+	<string>com.github.opusmarketing.download.BigPicture2024</string>
 	<key>Input</key>
 	<dict>
 		<key>APP_FILENAME</key>
-		<string>BigPicture</string>
+		<string>BigPicture 2024</string>
 		<key>NAME</key>
-		<string>BigPicture</string>
+		<string>BigPicture 2024</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
@@ -33,23 +31,23 @@
 			<string>EndOfCheckPhase</string>
 		</dict>
 
-		<!-- <dict>
+		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>pattern</key>
-				<string>BigPicute 20\d{4}.app</string>
+				<string>%pathname%/BigPicture 20??.app</string>
 			</dict>
 			<key>Processor</key>
 			<string>FileFinder</string>
-		</dict> -->
+		</dict>
 
 		<dict>
 			<key>Arguments</key>
 			<dict>
 				<key>input_path</key>
-				<string>%pathname%/BigPicture 20??.app</string>
+				<string>%pathname%/%found_basename%</string>
 				<key>requirement</key>
-				<string>anchor apple generic and identifier "com.badiasoftware.BigPicture15" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = PTY6UUWKUH)</string>
+				<string>anchor apple generic and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = PTY6UUWKUH)</string>
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
@@ -58,7 +56,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>input_plist_path</key>
-				<string>%pathname%/BigPicture 20??.app/Contents/Info.plist</string>
+				<string>%pathname%/%found_basename%/Contents/Info.plist</string>
 				<key>plist_version_key</key>
 				<string>CFBundleShortVersionString</string>
 			</dict>
