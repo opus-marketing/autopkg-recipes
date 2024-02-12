@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Description</key>
-    <string>Downloads latest version of Screaming Frog SEO, packages it as universal binary and imports it into Munki.</string>
+	<key>Description</key>
+	<string>Downloads latest version of Screaming Frog SEO and imports it into Munki.
+
+	For the Apple Silicon version, set DOWNLOAD_ARCH to aarch64 and SUPPORTED_ARCH to arm64
+	For the Intel version, set both DOWNLOAD_ARCH and SUPPORTED_ARCH to x86_64
+	</string>
     <key>Identifier</key>
     <string>com.github.opusmarketing.munki.ScreamingFrogSEO</string>
     <key>Input</key>
@@ -28,6 +32,10 @@
             <string>%NAME%</string>
             <key>name</key>
             <string>%NAMEWITHOUTSPACES%</string>
+            <key>supported_architectures</key>
+            <array>
+                <string>%SUPPORTED_ARCH%</string>
+            </array>
             <key>unattended_install</key>
             <true/>
         </dict>
@@ -44,7 +52,7 @@
           <key>Arguments</key>
           <dict>
               <key>pkg_path</key>
-              <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-Universal-%version%.pkg</string>
+              <string>%pathname%</string>
               <key>repo_subdirectory</key>
               <string>%MUNKI_REPO_SUBDIR%</string>
           </dict>

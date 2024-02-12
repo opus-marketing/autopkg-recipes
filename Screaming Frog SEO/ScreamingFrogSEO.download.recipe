@@ -3,23 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads latest version of Screaming Frog SEO.</string>
+	<string>Downloads latest version of Screaming Frog SEO.
+
+	For the Apple Silicon version, set DOWNLOAD_ARCH to aarch64 and SUPPORTED_ARCH to arm64
+	For the Intel version, set both DOWNLOAD_ARCH and SUPPORTED_ARCH to x86_64
+	</string>
 	<key>Identifier</key>
 	<string>com.github.opusmarketing.download.ScreamingFrogSEO</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>Screaming Frog SEO Spider</string>
-		<key>INTEL_ARCHITECTURE</key>
-		<string>x86_64</string>
-		<key>APPLE_SILICON_ARCHITECTURE</key>
+		<key>DOWNLOAD_ARCH</key>
 		<string>aarch64</string>
+		<key>SUPPORTED_ARCH</key>
+		<string>arm64</string>
 		<key>SEARCH_URL</key>
-		<string>https://www.screamingfrog.co.uk/wp-content/themes/screamingfrog/inc/download-modal.php</string>
-		<key>INTEL_SEARCH_PATTERN</key>
-		<string>(?P&lt;url&gt;https://download.screamingfrog.co.uk/products/seo-spider/ScreamingFrogSEOSpider-(?P&lt;version&gt;.*?)-%INTEL_ARCHITECTURE%.dmg)</string>
-		<key>APPLE_SILICON_SEARCH_PATTERN</key>
-		<string>(?P&lt;url&gt;https://download.screamingfrog.co.uk/products/seo-spider/ScreamingFrogSEOSpider-(?P&lt;version&gt;.*?)-%APPLE_SILICON_ARCHITECTURE%.dmg)</string>
+		<string>https://www.screamingfrog.co.uk/</string>
+		<key>DOWNLOAD_SEARCH_PATTERN</key>
+		<string>(?P&lt;url&gt;https://download.screamingfrog.co.uk/products/seo-spider/ScreamingFrogSEOSpider-(?P&lt;version&gt;.*?)-%DOWNLOAD_ARCH%.dmg)</string>	
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.1</string>
@@ -29,7 +31,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>re_pattern</key>
-				<string>%INTEL_SEARCH_PATTERN%</string>
+				<string>%DOWNLOAD_SEARCH_PATTERN%</string>
 				<key>url</key>
 				<string>%SEARCH_URL%</string>
 			</dict>
@@ -40,7 +42,7 @@
 			<key>Arguments</key>
 			<dict>
 				<key>download_dir</key>
-				<string>%RECIPE_CACHE_DIR%/downloads/intel</string>
+				<string>%RECIPE_CACHE_DIR%/downloads</string>
 				<key>url</key>
 				<string>%url%</string>
 			</dict>
@@ -54,43 +56,6 @@
 				<string>%pathname%/Screaming Frog SEO Spider.app</string>
 				<key>requirement</key>
 				<string>identifier "uk.co.screamingfrog.seo.spider" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = CAHEVC3HZC</string>
-			</dict>
-			<key>Processor</key>
-			<string>CodeSignatureVerifier</string>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>re_pattern</key>
-				<string>%APPLE_SILICON_SEARCH_PATTERN%</string>
-				<key>url</key>
-				<string>%SEARCH_URL%</string>
-			</dict>
-			<key>Processor</key>
-			<string>URLTextSearcher</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>download_dir</key>
-				<string>%RECIPE_CACHE_DIR%/downloads/applesilicon</string>
-				<key>url</key>
-				<string>%url%</string>
-			</dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-		</dict>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_path</key>
-				<string>%pathname%/Screaming Frog SEO Spider.app</string>
-				<key>requirement</key>
-				<string>identifier "uk.co.screamingfrog.seo.spider" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = CAHEVC3HZC</string>			
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
