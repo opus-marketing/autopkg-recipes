@@ -18,11 +18,5 @@
 	<key>ParentRecipe</key>
 	<string>com.github.opusmarketing.download.ScreamingFrogSEO</string>
 	<key>Process</key>
-	<array>
-		<dict>
-			<key>Processor</key>
-			<string>AppPkgCreator</string>
-		</dict>
-	</array>
 </dict>
 </plist>
