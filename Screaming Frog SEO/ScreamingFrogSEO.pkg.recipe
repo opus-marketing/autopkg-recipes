@@ -17,6 +17,5 @@
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
 	<string>com.github.opusmarketing.download.ScreamingFrogSEO</string>
-	<key>Process</key>
 </dict>
 </plist>
