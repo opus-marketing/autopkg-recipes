@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Rubberhose After Effects Plugin and creates a package.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.pkg.RubberhoseAE</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Rubberhose After Effects Plugin</string>
+        <key>SHORT_NAME</key>
+		<string>Rubberhose</string>
+        <key>PKG_ID</key>
+		<string>com.battleaxe.Rubberhose</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+    <key>ParentRecipe</key>
+	<string>com.github.opusmarketing.download.RubberhoseAE</string>
+	<key>Process</key>
+	<array>
+
+        <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpacked/</string>
+			</dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
+		</dict>
+
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pattern</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/*.zxp</string>
+            </dict>
+            <key>Processor</key>
+            <string>FileFinder</string>
+        </dict>
+
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>source</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/%found_basename%</string>
+                <key>target</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/%found_basename%.zip</string>
+            </dict>
+            <key>Processor</key>
+            <string>FileMover</string>
+        </dict>
+
+        <dict>
+			<key>Arguments</key>
+			<dict>
+                <key>archive_path</key>
+                <string>%RECIPE_CACHE_DIR%/unpacked/%found_basename%.zip</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/payload/Library/Application Support/Adobe/CEP/extensions/%SHORT_NAME%</string>
+			</dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
+		</dict>
+
+        <dict>
+			<key>comment</key>
+			<string>destination path for pkg is /Library/Application Support/Adobe/CEP/extensions/ with 755 for plugin and 775 for folder.</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_request</key>
+                <dict>
+                    <key>pkgroot</key>
+                    <string>%RECIPE_CACHE_DIR%/payload</string>
+                    <key>pkgdir</key>
+                    <string>%RECIPE_CACHE_DIR%</string>
+                    <key>pkgname</key>
+                    <string>%SHORT_NAME%-%version%</string>
+                    <key>id</key>
+                    <string>%PKG_ID%</string>
+                    <key>version</key>
+                    <string>%version%</string>
+                    <key>options</key>
+                    <string>purge_ds_store</string>
+                    <key>chown</key>
+                    <array>
+                         <dict>
+                            <key>path</key>
+                            <string>Library</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+                        <dict>
+                            <key>path</key>
+                            <string>Library/Application Support/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>admin</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+						<dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+						<dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/CEP/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>775</string>
+                        </dict>
+                        <dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/CEP/extensions/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>775</string>
+                        </dict>
+                        <dict>
+                            <key>path</key>
+                            <string>Library/Application Support/Adobe/CEP/extensions/%SHORT_NAME%/</string>
+                            <key>user</key>
+                            <string>root</string>
+                            <key>group</key>
+                            <string>wheel</string>
+							<key>mode</key>
+							<string>755</string>
+                        </dict>
+                    </array>
+                </dict>
+            </dict>
+			<key>Processor</key>
+            <string>PkgCreator</string>
+        </dict>
+
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>path_list</key>
+                <array>
+                    <string>%RECIPE_CACHE_DIR%/unpacked/</string>
+                    <string>%RECIPE_CACHE_DIR%/payload/</string>
+                </array>
+            </dict>
+            <key>Processor</key>
+            <string>PathDeleter</string>
+        </dict>
+
+    </array>
+</dict>
+</plist>

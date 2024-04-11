@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Rubberhose After Effects Plugin.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.download.RubberhoseAE</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Rubberhose After Effects Plugin</string>
+		<key>SEARCH_URL</key>
+		<string>https://battleaxe.co/docs/rubberhose-changelog</string>
+		<key>SEARCH_PATTERN</key>
+        <string>&lt;h4[^&gt;]*&gt;(?P&lt;version&gt;\d+\.\d+\.\d+)&lt;/h4&gt;</string>
+        <key>DOWNLOAD_URL_BASE</key>
+        <string>https://license.battleaxe.co/oracle</string>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>re_pattern</key>
+				<string>%SEARCH_PATTERN%</string>
+				<key>url</key>
+				<string>%SEARCH_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+        <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>download_dir</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/</string>
+				<key>url</key>
+				<string>%DOWNLOAD_URL_BASE%/Rubberhose_%version%.zip</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+		<dict>
+			<key>Processor</key>
+			<string>EndOfCheckPhase</string>
+		</dict> 
+	</array>
+</dict>
+</plist>
