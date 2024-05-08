@@ -13,7 +13,7 @@
         <key>DOWNLOAD_URL</key>
 		<string>https://www.fnordware.com/downloads</string>
 		<key>SEARCH_URL</key>
-		<string>https://www.fnordware.com/WebM</string>
+		<string>https://www.fnordware.com</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.6.1</string>
