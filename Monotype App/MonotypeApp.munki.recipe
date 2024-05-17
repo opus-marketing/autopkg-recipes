@@ -28,6 +28,16 @@
 			<string>%NAME%</string>
 			<key>unattended_install</key>
 			<false/>
+			<key>update_for</key>
+			<array>
+				<string>Monotype App</string>
+			</array>
+			<key>blocking_applications</key>
+            <array>
+                <string>Monotype desktop app</string>
+                <string>Monotype Fonts</string>
+				<string>Monotype Fonts Manager</string>
+            </array>
 		</dict>
 	</dict>
 	<key>MinimumVersion</key>
@@ -42,10 +52,8 @@
         	<dict>
 				<key>additional_pkginfo</key>
 				<dict>
-					<key>postuninstall_script</key>
+					<key>preinstall_script</key>
 					<string>#!/bin/bash
-set -x
-
 file="/Applications/Monotype desktop app/uninstall.app"
 if [ -e "$file" ]
 then
@@ -72,31 +80,12 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 done
 IFS="$OIFS"
 </string>
-					<key>preinstall_script</key>
-					<string>#!/bin/bash
-OIFS="$IFS"
-IFS=$'\n'
-for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
-	if ls -d1 "/Applications/$indesign/"*.app &gt; /dev/null 2&gt; /dev/null;
-	then
-		echo $indesign "is present."
-		if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
-			echo "Deleting InDesign Plugin..."
-			sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
-		fi
-		echo "Installation of InDesign Plugin(s) complete."
-	else
-		echo "$indesign is orphaned."
-	fi
-done
-IFS="$OIFS"
-</string>
 					<key>postinstall_script</key>
 					<string>#!/bin/bash
 #set -x
 OIFS="$IFS"
 IFS=$'\n'
-if [ ! -d "/Applications/Monotype desktop app/.addons/adobe_indesign" ]; then
+if [ ! -d "/Applications/Monotype Fonts/.Components/Plugins/Adobe/Indesign" ]; then
 	echo "Monotype Fonts InDesign Plugin directory not present. Quitting!"
 	exit 1
 fi
@@ -106,10 +95,10 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 		echo $indesign "is present."
 		indesignversion=$(defaults read "/Applications/$indesign/$indesign.app/Contents/Info.plist" CFBundleShortVersionString | awk -F. '{print $1}')
 		echo "InDesign version number:" $indesignversion
-		for pluginversion in $(cd "/Applications/Monotype desktop app/.addons/adobe_indesign" &amp;&amp; ls -1); do
+		for pluginversion in $(cd "/Applications/Monotype Fonts/.Components/Plugins/Adobe/Indesign" &amp;&amp; ls -1); do
 			if [ $pluginversion == $indesignversion ]; then
 				echo "Copying InDesign Plugin version $pluginversion to $indesign..."
-				unzip -KXoq "/Applications/Monotype desktop app/.addons/adobe_indesign/$pluginversion/*.zip" -d /tmp/
+				unzip -KXoq "/Applications/Monotype Fonts/.Components/Plugins/Adobe/Indesign/$pluginversion/*.zip" -d /tmp/
 				for pluginfile in $(cd /tmp/ &amp;&amp; ls -d1 *.InDesignPlugin); do
 					sudo mv -f /tmp/$pluginfile /Applications/$indesign/Plug-Ins/
 					sudo chown -R root:admin /Applications/$indesign/Plug-Ins/$pluginfile
@@ -124,6 +113,35 @@ for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
 done
 IFS="$OIFS"
 </string>
+<key>preuninstall_script</key>
+<string>#!/bin/bash
+if [ -L /Applications/Monotype\ Fonts/Uninstaller.app ]; then
+rm /Applications/Monotype\ Fonts/Uninstaller.app
+fi
+if [ -L /Applications/Monotype\ Fonts/Monotype\ Fonts.app ]; then
+rm /Applications/Monotype\ Fonts/Monotype\ Fonts.app
+fi
+</string>
+<key>postuninstall_script</key>
+<string>#!/bin/bash
+set -x
+OIFS="$IFS"
+IFS=$'\n'
+for indesign in $(cd /Applications &amp;&amp; ls -d1 *InDesign*); do
+if ls -d1 "/Applications/$indesign/"*.app &gt; /dev/null 2&gt; /dev/null;
+then
+echo $indesign "is present."
+if [ -d "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin ]; then
+echo "Deleting InDesign Plugin..."
+sudo rm -rf "/Applications/$indesign/Plug-Ins/"*Monotype*.InDesignPlugin
+fi
+echo "Installation of InDesign Plugin(s) complete."
+else
+echo "$indesign is orphaned."
+fi
+done
+IFS="$OIFS"
+</string>
 				</dict>
 			</dict>
 			<key>Processor</key>
@@ -134,7 +152,7 @@ IFS="$OIFS"
         	<key>Arguments</key>
         	<dict>
             	<key>pkg_path</key>
-            	<string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
+            	<string>%found_filename%</string>
             	<key>repo_subdirectory</key>
             	<string>%MUNKI_REPO_SUBDIR%</string>
           	</dict>
@@ -145,5 +163,3 @@ IFS="$OIFS"
 	</array>
 </dict>
 </plist>
-
-

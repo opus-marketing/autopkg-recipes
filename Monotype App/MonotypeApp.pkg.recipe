@@ -1,109 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Description</key>
-	<string>Downloads latest version of the Monotype App and builds an installer package which installs the correct version for your Mac's processor.</string>
-	<key>Identifier</key>
-	<string>com.github.opusmarketing.pkg.MonotypeApp</string>
-	<key>Input</key>
 	<dict>
-		<key>NAME</key>
-		<string>Monotype App</string>
-		<key>NAMEWITHOUTSPACES</key>
-		<string>MonotypeApp</string>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>1.0.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.opusmarketing.download.MonotypeApp</string>
-	<key>Process</key>
-	<array>
-		
+		<key>Description</key>
+		<string>Downloads latest version of the Monotype App and builds an installer package which
+			installs the correct version for your Mac's processor.</string>
+		<key>Identifier</key>
+		<string>com.github.opusmarketing.pkg.MonotypeApp</string>
+		<key>Input</key>
 		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>flat_pkg_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
-			</dict>
-			<key>Processor</key>
-			<string>FlatPkgUnpacker</string>
+			<key>NAME</key>
+			<string>Monotype App</string>
+			<key>NAMEWITHOUTSPACES</key>
+			<string>MonotypeApp</string>
 		</dict>
-
-     	<dict>
-			<key>Arguments</key>
+		<key>MinimumVersion</key>
+		<string>1.0.0</string>
+		<key>ParentRecipe</key>
+		<string>com.github.opusmarketing.download.MonotypeApp</string>
+		<key>Process</key>
+		<array>
 			<dict>
-				<key>pkg_payload_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/Payload</string>
-				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/</string>
+				<key>Arguments</key>
+				<dict>
+					<key>pattern</key>
+					<string>%RECIPE_CACHE_DIR%/unpacked/*.pkg</string>
+				</dict>
+				<key>Processor</key>
+				<string>FileFinder</string>
 			</dict>
-			<key>Processor</key>
-			<string>PkgPayloadUnpacker</string>
-		</dict>
-
-     	<dict>
-            <key>Arguments</key>
-            <dict>
-                <key>archive_path</key>
-                <string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app.zip</string>
-                <key>destination_path</key>
-                <string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/</string>
-            </dict>
-            <key>Processor</key>
-            <string>Unarchiver</string>
-      	</dict>
-
-      	<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>input_plist_path</key>
-				<string>%RECIPE_CACHE_DIR%/unpacked/pkg/payload-unpacked/app/DTAppInstaller.app/Contents/Info.plist</string>
-			</dict>
-			<key>Processor</key>
-			<string>Versioner</string>
-		</dict>
-
-    	<dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>path_list</key>
-				<array>
-					<string>%RECIPE_CACHE_DIR%/unpacked/pkg</string>
-				</array>
-			</dict>
-		</dict>
-
-      <dict>
-         <key>Processor</key>
-         <string>FileMover</string>
-         <key>Arguments</key>
-         <dict>
-            <key>source</key>
-            <string>%RECIPE_CACHE_DIR%/unpacked/DTAppInstaller.pkg</string>
-            <key>target</key>
-            <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
-            <key>overwrite</key>
-            <false />
-         </dict>
-      </dict>
-
-      <dict>
-			<key>Processor</key>
-			<string>PathDeleter</string>
-			<key>Arguments</key>
-			<dict>
-				<key>path_list</key>
-				<array>
-             	<string>%RECIPE_CACHE_DIR%/unpacked</string>
-				</array>
-			</dict>
-		</dict>
-
-	</array>
-</dict>
+		</array>
+	</dict>
 </plist>
