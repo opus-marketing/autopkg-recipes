@@ -13,7 +13,7 @@
 		<key>SEARCH_URL</key>
 		<string>https://support.monotype.com/en/articles/7859096-syncing-and-installing-fonts-with-the-monotype-app</string>
 		<key>SEARCH_PATTERN</key>
-		<string>(?P&lt;url&gt;https://monotypeapp.monotype.com/release/\d{1,5}/mac/MTFInstaller.zip)</string>
+		<string>(?P&lt;url&gt;https://monotypeapp.monotype.com/release/\d{1,5}/mac/MTFInstallerMacOS.zip)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.1</string>
