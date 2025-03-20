@@ -4,10 +4,10 @@
 	<dict>
 		<key>Description</key>
 		<string>Downloads the latest version of PDFsam Basic and imports it into Munki.
-		
+
 To select the architecture, use the following keys: 
 - For Intel: SUPPORTED_ARCH = x86_64 and DOWNLOAD_ARCH = x64 
-- For Apple	Silicon: SUPPORTED_ARCH = arm64 and DOWNLOAD_ARCH = arm64</string>
+- For Apple Silicon: SUPPORTED_ARCH = arm64 and DOWNLOAD_ARCH = arm64</string>
 		<key>Identifier</key>
 		<string>com.github.opusmarketing.munki.PDFsamBasic</string>
 		<key>Input</key>
