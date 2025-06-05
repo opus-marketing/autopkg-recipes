@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Description</key>
+        <string>Downloads the latest version of the Barco ClickShare app (PKG version) and imports into Munki.</string>
+        <key>Identifier</key>
+        <string>com.opusmarketing.munki.ClickSharePkg</string>
+        <key>Input</key>
+        <dict>
+            <key>NAME</key>
+            <string>ClickShare</string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>apps/%NAME%</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>testing</string>
+                </array>
+                <key>category</key>
+                <string>Applications</string>
+                <key>description</key>
+                <string>ClickShare, wireless presentation and conferencing technology, creates understanding between people by freeing them to interact easily and naturally.</string>
+                <key>developer</key>
+                <string>Barco</string>
+                <key>display_name</key>
+                <string>%NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true/>
+                <key>preinstall_script</key>
+                <string>#!/bin/bash
+### get currently logged in user
+username=$(/usr/bin/stat -f "%Su" /dev/console 2>/dev/null)
+if [ "$username" == "" ]; then
+    echo "Failed to determine the currently logged-in user or no user logged in. Exiting."
+    exit 1
+fi
+### delete clickshare app in user home directory
+if [ -d "/Users/$username/.clickshare" ]; then
+    sudo -u $username rm -rf /Users/$username/.clickshare
+fi
+rm -f /Library/Preferences/com.barco.clickshare.plist
+defaults write /Library/Preferences/com.barco.clickshare.plist ACCEPT_EULA -string "YES"</string>
+                <key>postinstall_script</key>
+                <string>#!/bin/bash
+### add managed preferences for clickshare app
+defaults write /Library/Preferences/com.barco.clickshare.plist AUTO_UPDATE -string "NO"
+defaults write /Library/Preferences/com.barco.clickshare.plist AutoUpdateEnable -bool false
+defaults write /Library/Preferences/com.barco.clickshare.plist BETA_PROGRAM -string "NO"
+defaults write /Library/Preferences/com.barco.clickshare.plist BetaProgramDisable -bool true
+defaults write /Library/Preferences/com.barco.clickshare.plist PRODUCT_USAGE_ANALYTICS -string "NO"
+defaults write /Library/Preferences/com.barco.clickshare.plist ProductUsageAnalyticsDisable -bool true
+defaults write /Library/Preferences/com.barco.clickshare.plist InstalledType -string "PKG"</string>
+                <key>postuninstall_script</key>
+                <string>#!/bin/bash
+### get currently logged in user
+username=$(/usr/bin/stat -f "%Su" /dev/console 2>/dev/null)
+if [ "$username" == "" ]; then
+    echo "Failed to determine the currently logged-in user or no user logged in. Exiting."
+    exit 1
+fi
+### delete clickshare app in user home directory
+if [ -d "/Users/$username/.clickshare" ]; then
+    sudo -u $username rm -rf /Users/$username/.clickshare
+fi
+rm -f /Library/Preferences/com.barco.clickshare.plist</string>
+            </dict>
+        </dict>
+        <key>MinimumVersion</key>
+        <string>0.2.9</string>
+        <key>ParentRecipe</key>
+        <string>com.opusmarketing.download.ClickSharePkg</string>
+        <key>Process</key>
+        <array>
+
+            <dict>
+                <key>Processor</key>
+                <string>MunkiImporter</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%found_basename%</string>
+                    <key>repo_subdirectory</key>
+                    <string>%MUNKI_REPO_SUBDIR%</string>
+                </dict>
+            </dict>
+
+        </array>
+    </dict>
+</plist>
