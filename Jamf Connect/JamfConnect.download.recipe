@@ -20,6 +20,8 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>prefetch_filename</key>
+				<true/>
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 				<key>url</key>
@@ -42,7 +44,7 @@
 					<string>Apple Root CA</string>
 				</array>
 				<key>input_path</key>
-				<string>%pathname%/JamfConnect.pkg</string>
+				<string>%pathname%/JamfConnectLogin.pkg</string>
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
