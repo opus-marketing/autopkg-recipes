@@ -43,7 +43,7 @@ sudo killall "Jamf Connect"</string>
 			<key>Arguments</key>
 			<dict>
                 <key>pkg_path</key>
-                <string>%pathname%/JamfConnectLogin.pkg</string>
+                <string>%MUNKI_REPO_SUBDIR%/downloads/JamfConnectLogin-%version%.pkg</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
 			</dict>
