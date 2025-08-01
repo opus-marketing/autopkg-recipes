@@ -46,7 +46,7 @@
                         <key>Priority</key>
                         <string>u=0, i</string>
                         <key>Accept-Encoding</key>
-                        <string>gzip, deflate, br</string>
+                        <string>gzip, deflate</string>
                         <key>Sec-Fetch-Mode</key>
                         <string>navigate</string>
                     </dict>
