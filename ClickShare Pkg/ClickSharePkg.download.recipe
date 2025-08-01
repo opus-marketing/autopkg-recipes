@@ -28,6 +28,8 @@
                         <string>%RECIPE_CACHE_DIR%/cookies.txt</string>
                         <string>--cookie</string>
                         <string>%RECIPE_CACHE_DIR%/cookies.txt</string>
+                        <string>--header</string>
+                        <string>'Accept-Encoding: gzip, deflate</string>
                     </array>
                     <key>request_headers</key>
                     <dict>
