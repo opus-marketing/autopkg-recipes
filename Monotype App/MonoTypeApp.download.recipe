@@ -10,8 +10,10 @@
 	<dict>
 		<key>NAME</key>
 		<string>Monotype App</string>
-		<key>DOWNLOAD_URL</key>
-		<string>https://monotypeapp.monotype.com/release/latest/mac/MTFInstallerMacOS.zip</string>
+		<key>SEARCH_URL</key>
+		<string>https://support.monotype.com/en/articles/7859096-syncing-and-installing-fonts-with-the-monotype-app</string>
+		<key>SEARCH_PATTERN</key>
+		<string>(?P&lt;url&gt;https://monotypeapp.monotype.com/release/\d{1,5}/mac/MTFInstallerMacOS.zip)</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>0.2.1</string>
@@ -20,10 +22,21 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
+				<key>re_pattern</key>
+				<string>%SEARCH_PATTERN%</string>
+				<key>url</key>
+				<string>%SEARCH_URL%</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
 				<key>download_dir</key>
 				<string>%RECIPE_CACHE_DIR%/downloads</string>
 				<key>url</key>
-				<string>%DOWNLOAD_URL%</string>
+				<string>%url%</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
