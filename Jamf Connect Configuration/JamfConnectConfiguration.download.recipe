@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>Description</key>
+		<string>Downloads the latest version of Jamf Connect Configuration.</string>
+		<key>Identifier</key>
+		<string>com.github.opusmarketing.download.JamfConnectConfiguration</string>
+		<key>Input</key>
+		<dict>
+			<key>NAME</key>
+			<string>Jamf Connect Configuration</string>
+			<key>NAMEWITHOUTSPACES</key>
+			<string>JamfConnectConfiguration</string>
+			<key>DOWNLOAD_URL</key>
+			<string>https://files.jamfconnect.com/JamfConnect.dmg</string>
+		</dict>
+		<key>MinimumVersion</key>
+		<string>1.0.0</string>
+		<key>Process</key>
+		<array>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>prefetch_filename</key>
+					<true/>
+					<key>url</key>
+					<string>%DOWNLOAD_URL%</string>
+				</dict>
+				<key>Processor</key>
+				<string>URLDownloader</string>
+			</dict>
+			<dict>
+				<key>Processor</key>
+				<string>EndOfCheckPhase</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>input_path</key>
+					<string>%pathname%/Jamf Connect Configuration.app</string>
+					<key>requirement</key>
+					<string>anchor apple generic and identifier "com.jamf.connect.configuration" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "483DWKW443")</string>
+				</dict>
+				<key>Processor</key>
+				<string>CodeSignatureVerifier</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>dmg_path</key>
+					<string>%pathname%</string>
+				</dict>
+				<key>Processor</key>
+				<string>AppDmgVersioner</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>source_path</key>
+					<string>%pathname%/Jamf Connect Configuration.app</string>
+					<key>destination_path</key>
+					<string>%RECIPE_CACHE_DIR%/unpacked/Jamf Connect Configuration.app</string>
+					<key>overwrite</key>
+					<true/>
+				</dict>
+				<key>Processor</key>
+				<string>Copier</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>dmg_root</key>
+					<string>%RECIPE_CACHE_DIR%/unpacked</string>
+					<key>dmg_path</key>
+					<string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.dmg</string>
+				</dict>
+				<key>Processor</key>
+				<string>DmgCreator</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<dict>
+					<key>path_list</key>
+					<array>
+						<string>%RECIPE_CACHE_DIR%/unpacked</string>
+					</array>
+				</dict>
+				<key>Processor</key>
+				<string>PathDeleter</string>
+			</dict>
+		</array>
+	</dict>
+</plist>

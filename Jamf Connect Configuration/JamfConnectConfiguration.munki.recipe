@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads the latest version of Jamf Connect Configuration and imports it into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.opusmarketing.munki.JamfConnectConfiguration</string>
+	<key>Input</key>
+	<dict>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/%NAME%</string>
+		<key>NAME</key>
+		<string>Jamf Connect Configuration</string>
+		<key>NAMEWITHOUTSPACES</key>
+		<string>JamfConnectConfiguration</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>Jamf Connect is a collection of apps allowing for simple provisioning of local user accounts and password synchronization from a cloud identity provider (IdP) during an Apple provisioning workflow. This includes multi-factor authentication (MFA).</string>
+			<key>developer</key>
+			<string>JAMF Software</string>
+			<key>display_name</key>
+			<string>Jamf Connect Configuration</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>1.0.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.opusmarketing.download.JamfConnectConfiguration</string>
+	<key>Process</key>
+	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+                <key>pkg_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.dmg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiImporter</string>
+		</dict>
+	</array>
+</dict>
+</plist>
