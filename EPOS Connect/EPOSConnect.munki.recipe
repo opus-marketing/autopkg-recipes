@@ -14,21 +14,6 @@
 		<string>EPOSConnect</string>
         <key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
-        <key>pkginfo</key>
-        <dict>
-            <key>catalogs</key>
-            <array>
-                <string>testing</string>
-            </array>
-            <key>description</key>
-			<string>Update with the latest firmware and personalize your EPOS audio device settings to ensure flawless operation and maximum productivity.</string>
-			<key>developer</key>
-			<string>EPOS</string>
-			<key>display_name</key>
-			<string>%NAME%</string>
-			<key>name</key>
-			<string>%NAMEWITHOUTSPACES%</string>
-        </dict>
     </dict>
     <key>MinimumVersion</key>
     <string>2.0.0</string>
@@ -45,6 +30,38 @@
               <string>%pathname%</string>
               <key>repo_subdirectory</key>  
               <string>%MUNKI_REPO_SUBDIR%</string>
+              <key>pkginfo</key>
+              <dict>
+                  <key>catalogs</key>
+                  <array>
+                      <string>testing</string>
+                  </array>
+                  <key>description</key>
+                  <string>Update with the latest firmware and personalize your EPOS audio device settings to ensure flawless operation and maximum productivity.</string>
+                  <key>developer</key>
+                  <string>EPOS</string>
+                  <key>display_name</key>
+                  <string>%NAME%</string>
+                  <key>installs</key>
+                  <array>
+                      <dict>
+                          <key>CFBundleIdentifier</key>
+                          <string>com.eposaudio.eposconnect</string>
+                          <key>CFBundleShortVersionString</key>
+                          <string>%version%</string>
+                          <key>path</key>
+                          <string>/Applications/EPOS Connect.app</string>
+                          <key>type</key>
+                          <string>application</string>
+                          <key>version_comparison_key</key>
+                          <string>CFBundleShortVersionString</string>
+                      </dict>
+                  </array>
+                  <key>name</key>
+                  <string>%NAMEWITHOUTSPACES%</string>
+                  <key>version</key>
+                  <string>%version%</string>
+              </dict>
           </dict>
       </dict>
     </array>
