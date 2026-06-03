@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Description</key>
+        <string>Downloads latest version of the REINER SCT cyberJack RFID Driver and imports it into Munki.</string>
+        <key>Identifier</key>
+        <string>com.github.opusmarketing.munki.REINERSCTcyberJackRFID</string>
+        <key>Input</key>
+        <dict>
+            <key>NAME</key>
+            <string>cyberJack RFID Driver</string>
+            <key>NAMEWITHOUTSPACES</key>
+            <string>cyberJackRFIDDriver</string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>apps/%NAME%</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>testing</string>
+                </array>
+                <key>description</key>
+                <string>Driver for the cyberJack RFID smart card reader device.</string>
+                <key>developer</key>
+                <string>REINER SCT</string>
+                <key>display_name</key>
+                <string>%NAME%</string>
+                <key>name</key>
+                <string>%NAMEWITHOUTSPACES%</string>
+                <key>supported_architectures</key>
+                <array>
+                    <string>%ARCH%</string>
+                </array>
+            </dict>
+        </dict>
+        <key>MinimumVersion</key>
+        <string>2.0.0</string>
+        <key>ParentRecipe</key>
+        <string>com.github.opusmarketing.download.REINERSCTcyberJackRFID</string>
+        <key>Process</key>
+        <array>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiPkginfoMerger</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>additional_pkginfo</key>
+                    <dict>
+                        <key>version</key>
+                        <string>%version%</string>
+                    </dict>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>Copier</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>source_path</key>
+                    <string>%pathname%</string>
+                    <key>destination_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
+                    <key>overwrite</key>
+                    <true/>
+                </dict>
+            </dict>
+            <dict>
+                <key>Processor</key>
+                <string>MunkiImporter</string>
+                <key>Arguments</key>
+                <dict>
+                    <key>pkg_path</key>
+                    <string>%RECIPE_CACHE_DIR%/%NAMEWITHOUTSPACES%-%version%.pkg</string>
+                    <key>repo_subdirectory</key>
+                    <string>%MUNKI_REPO_SUBDIR%</string>
+                </dict>
+            </dict>
+        </array>
+    </dict>
+</plist>
