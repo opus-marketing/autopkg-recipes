@@ -1,0 +1,49 @@
+Description: |
+  Downloads the latest version of DaVinci Resolve and imports it into Munki.
+
+  This product requires registration in order to download, so
+  you _must_ override all input variables beginning with 'REG_'
+  and they must contain data.
+
+  Notably, REG_COUNTRY must contain sane values:
+  - REG_COUNTRY is of the form 'us', 'ca', 'de', etc.
+
+  You must also override PRODUCT_MAJOR_VERSION (e.g. '21'), as the
+  parent recipe defaults to '17'.
+Identifier: com.github.opusmarketing.munki.BlackmagicDaVinciResolve
+ParentRecipe: com.github.davidbpirie.download.BlackmagicDaVinciResolve
+MinimumVersion: 2.3.0
+
+Input:
+  NAME: DaVinciResolve
+  MUNKI_REPO_SUBDIR: apps/%NAME%
+  pkginfo:
+    catalogs:
+      - testing
+    description: DaVinci Resolve is the world's only solution that combines editing, color correction, visual effects, motion graphics and audio post production all in one software tool.
+    developer: Blackmagic Design
+    display_name: DaVinci Resolve
+    name: '%NAME%'
+    category: Video
+    unattended_install: true
+
+Process:
+  - Processor: PkgCopier
+    Arguments:
+      source_pkg: '%found_filename%/*.pkg'
+      pkg_path: '%RECIPE_CACHE_DIR%/%NAME%-%version%.pkg'
+
+  - Processor: MunkiPkginfoMerger
+    Arguments:
+      additional_pkginfo:
+        version: '%version%'
+
+  - Processor: MunkiImporter
+    Arguments:
+      pkg_path: '%pkg_path%'
+      repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - '%RECIPE_CACHE_DIR%/unzip'
