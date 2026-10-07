@@ -12,7 +12,7 @@ Description: |
   parent recipe defaults to '17'.
 Identifier: com.github.opusmarketing.munki.BlackmagicDaVinciResolve
 ParentRecipe: com.github.davidbpirie.download.BlackmagicDaVinciResolve
-MinimumVersion: 2.3.0
+MinimumVersion: 2.7.0
 
 Input:
   NAME: DaVinciResolve
@@ -42,6 +42,13 @@ Process:
     Arguments:
       pkg_path: '%pkg_path%'
       repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
+
+  - Processor: MunkiOptionalReceiptEditor
+    Arguments:
+      pkginfo_repo_path: '%pkginfo_repo_path%'
+      repo_subdirectory: '%MUNKI_REPO_SUBDIR%'
+      pkg_ids_set_optional_true:
+        - com.blackmagic-design.ManifestFairlightAudioAccelerator
 
   - Processor: PathDeleter
     Arguments:
