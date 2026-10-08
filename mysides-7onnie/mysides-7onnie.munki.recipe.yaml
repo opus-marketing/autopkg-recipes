@@ -1,0 +1,28 @@
+Description: |
+  Downloads the latest release of mysides, builds a package that installs
+  the binary to /usr/local/bin/mysides and imports it into Munki.
+
+  Set ARCH to choose which build is used (universal or arm64).
+  For arm64 you may want to add 'supported_architectures: [arm64]'
+  to the pkginfo in your override.
+Identifier: com.github.opusmarketing.munki.mysides-7onnie
+ParentRecipe: com.github.opusmarketing.pkg.mysides-7onnie
+MinimumVersion: 2.3.0
+
+Input:
+  NAME: mysides
+  MUNKI_REPO_SUBDIR: ''
+  pkginfo:
+    catalogs:
+      - testing
+    description: A command-line tool to manage Finder sidebar favorites on macOS.
+    developer: 7onnie
+    display_name: mysides
+    name: '%NAME%'
+    unattended_install: true
+
+Process:
+  - Processor: MunkiImporter
+    Arguments:
+      pkg_path: '%pkg_path%'
+      repo_subdirectory: '%MUNKI_REPO_SUBDIR%'

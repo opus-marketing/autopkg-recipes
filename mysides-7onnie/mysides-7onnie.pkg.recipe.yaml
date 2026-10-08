@@ -1,0 +1,55 @@
+Description: |
+  Downloads the latest release of mysides and builds a package that
+  installs the binary to /usr/local/bin/mysides.
+
+  Set ARCH to choose which build is packaged (universal or arm64).
+Identifier: com.github.opusmarketing.pkg.mysides-7onnie
+ParentRecipe: com.github.opusmarketing.download.mysides-7onnie
+MinimumVersion: 2.3.0
+
+Input:
+  NAME: mysides
+  PKG_ID: com.github.7onnie.mysides
+
+Process:
+  - Processor: Unarchiver
+    Arguments:
+      archive_path: '%pathname%'
+      destination_path: '%RECIPE_CACHE_DIR%/unpack'
+      purge_destination: true
+
+  - Processor: PkgRootCreator
+    Arguments:
+      pkgroot: '%RECIPE_CACHE_DIR%/pkgroot'
+      pkgdirs:
+        usr: '0755'
+        usr/local: '0755'
+        usr/local/bin: '0755'
+
+  - Processor: Copier
+    Arguments:
+      source_path: '%RECIPE_CACHE_DIR%/unpack/mysides-*/mysides'
+      destination_path: '%pkgroot%/usr/local/bin/mysides'
+
+  - Processor: PkgCreator
+    Arguments:
+      pkg_request:
+        pkgname: '%NAME%-%ARCH%-%version%'
+        pkgdir: '%RECIPE_CACHE_DIR%'
+        id: '%PKG_ID%'
+        version: '%version%'
+        options: purge_ds_store
+        chown:
+          - path: usr
+            user: root
+            group: wheel
+          - path: usr/local/bin/mysides
+            user: root
+            group: wheel
+            mode: '0755'
+
+  - Processor: PathDeleter
+    Arguments:
+      path_list:
+        - '%RECIPE_CACHE_DIR%/unpack'
+        - '%RECIPE_CACHE_DIR%/pkgroot'

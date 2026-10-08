@@ -1,0 +1,26 @@
+Description: |
+  Downloads the latest release of mysides from GitHub.
+
+  Set ARCH to choose which build is downloaded:
+  - universal (default, x86_64 + arm64)
+  - arm64
+Identifier: com.github.opusmarketing.download.mysides-7onnie
+MinimumVersion: 2.3.0
+
+Input:
+  NAME: mysides
+  GITHUB_REPO: 7onnie/mysides
+  ARCH: arm64
+
+Process:
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      github_repo: '%GITHUB_REPO%'
+      asset_regex: '^mysides-.*-%ARCH%\.tar\.gz$'
+
+  - Processor: URLDownloader
+    Arguments:
+      url: '%url%'
+      filename: '%NAME%-%ARCH%-%version%.tar.gz'
+
+  - Processor: EndOfCheckPhase
